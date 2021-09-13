@@ -14,7 +14,7 @@ public class addList extends Task{
         for (String word : toDoTask){
             result += word + " ";
         }
-        return result.trim();
+        return result.substring(5).trim();
     }
     static boolean validateDoneTask (String doneInput, List<Task> taskList) throws DukeException {
        int taskIndex = Integer.parseInt(doneInput.substring(5));
