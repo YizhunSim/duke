@@ -17,6 +17,7 @@ public class Ui {
                     + DIVIDER;
     private final Scanner in;
     private final PrintStream out;
+    public static final String MESSAGE_INIT_FAILED = "Failed to initialise duke application. Exiting...";
 
     public Ui() {
         this(System.in, System.out);
@@ -29,6 +30,22 @@ public class Ui {
 
     public void showWelcome(){
         out.println(DUKE_SPLASHSCREEN);
+    }
+
+    public void showLoadingError(){
+        out.println(MESSAGE_INIT_FAILED);
+    }
+
+    public void showError(String errorMessage){
+        out.println(errorMessage);
+    }
+
+    public void showLine(){
+        out.println(DIVIDER);
+    }
+
+    public String readCommand(){
+        return in.nextLine();
     }
 
 }
