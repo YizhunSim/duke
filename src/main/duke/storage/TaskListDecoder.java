@@ -1,7 +1,16 @@
+package storage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import data.exception.DukeException;
+import data.Deadline;
+import data.Event;
+import data.Todo;
+
+import data.Task;
 
 public class TaskListDecoder {
     public static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
@@ -39,7 +48,7 @@ public class TaskListDecoder {
             }
         } else if (typeOfTask.equals("E")) {
             String eventDate = data[3].trim();
-            newTask = new Deadline(taskDescription, eventDate);
+            newTask = new Event(taskDescription, eventDate);
             if (taskStatus.equals("1")) {
                 newTask.markAsDone();
             }

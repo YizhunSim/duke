@@ -1,18 +1,25 @@
 import java.io.IOException;
 
+import commands.Command;
+import parser.Parser;
+import storage.Storage;
+import ui.Ui;
+import data.TaskList;
+import data.exception.DukeException;
+
 public class Duke {
     private Ui ui;
     private Storage storage;
-    private TaskList tasks;
+    private TaskList taskList;
 
     public Duke(String filePath){
         ui = new Ui();
         storage = new Storage(filePath);
         try{
-            tasks = new TaskList(storage.load());
+            taskList = new TaskList(storage.load());
         }catch(DukeException | IOException e){
             ui.showLoadingError();
-            tasks = new TaskList();
+            taskList = new TaskList();
             ui.showError(e.getMessage());
         }
     }
@@ -24,9 +31,11 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("______")
-
-//            } catch (DukeException e){
-//                ui.showError(e.getMessage());
+                Command c = new Parser().parseCommand(fullCommand);
+                c.execute(taskList, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e){
+                ui.showError(e.getMessage());
             }
             finally {
                 ui.showLine();
