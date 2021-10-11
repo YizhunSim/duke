@@ -1,6 +1,11 @@
+package ui;
+
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
+
+import data.Task;
 
 public class Ui {
     private static final String DIVIDER = "____________________________________________________________";
@@ -18,6 +23,7 @@ public class Ui {
     private final Scanner in;
     private final PrintStream out;
     public static final String MESSAGE_INIT_FAILED = "Failed to initialise duke application. Exiting...";
+    public static final String INVALID_INPUT_USER = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     public Ui() {
         this(System.in, System.out);
@@ -40,12 +46,52 @@ public class Ui {
         out.println(errorMessage);
     }
 
+    public void showInvalidInput(){
+        out.println(INVALID_INPUT_USER);
+    }
+
     public void showLine(){
         out.println(DIVIDER);
     }
 
     public String readCommand(){
         return in.nextLine();
+    }
+
+    public void printAllTasks(List<Task> taskList){
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println(i + 1 + ". " + taskList.get(i));
+        }
+    }
+
+    public void showNewlyAddedTask(){
+        showLine();
+        out.println(" Got it. I've added this task:");
+
+    }
+
+    public void printTask(String task){
+        out.println("   " + task); // Get the latest added task from the taskList
+    }
+
+    public void printTaskCount(int taskCount){
+        System.out.println("Now you have " + taskCount + " tasks in the list.");
+    }
+
+    // Combines addToDo Print into one function
+    public void printAddTodo(String task, int taskListCount){
+        showNewlyAddedTask();
+        printTask(task);
+        printTaskCount(taskListCount);
+    }
+
+    public void showGoodByeMessage(){
+        out.println("____________________________________________________________\n"
+                + " Bye. Hope to see you again soon!\n");
+    }
+
+    public void showDeletedTask(String deletedTask){
+        out.println(deletedTask);
     }
 
 }
