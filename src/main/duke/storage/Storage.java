@@ -1,24 +1,23 @@
+package storage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.regex.Pattern;
+
+import data.Task;
+import data.TaskList;
+import data.exception.DukeException;
 
 public class Storage {
     private File f;
     String dukeTextFilePath;
     public final String home = System.getProperty(("user.home"));
     public Path path;
-
-    /*Can be converted to enums*/
-    final static String TODO = "T";
-    final static String DEADLINE = "D";
-    final static String EVENT = "E";
 
     public Storage(String filePath){
 
@@ -50,5 +49,9 @@ public class Storage {
 
     public List<Task> load() throws IOException, DukeException {
         return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
+    }
+
+    public void saveTask(TaskList newTask){
+       //return TaskListEncoder.encodeTaskList(newTask);
     }
 }

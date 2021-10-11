@@ -3,6 +3,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.lang.Integer;
 
+import data.*;
+import data.exception.DukeException;
+
+
 public class addList extends Task{
     static String validateToDoTask (String task) throws DukeException{
         String[] toDoTask = task.split(" ");
