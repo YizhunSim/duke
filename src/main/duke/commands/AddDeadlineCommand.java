@@ -15,7 +15,7 @@ public class AddDeadlineCommand extends Command{
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage){
         taskList.addTask(task);
-        //storage.saveTask(taskList.);
+        storage.saveTask(taskList.getLatestAddedTask());
         ui.printAddTodo(task.getTaskDescription(), taskList.getTotalListCount());
     }
 }

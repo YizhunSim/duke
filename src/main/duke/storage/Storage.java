@@ -15,9 +15,9 @@ import data.exception.DukeException;
 
 public class Storage {
     private File f;
-    String dukeTextFilePath;
+    private String dukeTextFilePath;
     public final String home = System.getProperty(("user.home"));
-    public Path path;
+    private Path path;
 
     public Storage(String filePath){
 
@@ -51,7 +51,11 @@ public class Storage {
         return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
     }
 
-    public void saveTask(TaskList newTask){
-       //return TaskListEncoder.encodeTaskList(newTask);
+    public void saveTask(Task taskToBeSave) {
+        try {
+            TaskListEncoder.encodeTaskList(taskToBeSave, dukeTextFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

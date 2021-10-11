@@ -29,4 +29,8 @@ public class TaskList {
     public String deleteTask(int toBeDeletedTask){
         return allTasks.get(toBeDeletedTask).getTaskDescription();
     }
+
+    public Task getLatestAddedTask(){
+        return allTasks.get(getTotalListCount()-1);
+    }
 }
