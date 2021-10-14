@@ -118,7 +118,7 @@ public class Parser {
     private static Command doDeleteTaskCommand(String args){
         try{
             int targetIndex = Integer.parseInt((args));
-            return new DeleteTaskCommand(targetIndex);
+            return new DeleteTaskCommand(targetIndex - 1);
         } catch (Exception e){
             return new IncorrectCommand("Task cannot be deleted");
         }

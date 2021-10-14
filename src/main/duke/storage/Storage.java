@@ -53,7 +53,15 @@ public class Storage {
 
     public void saveTask(Task taskToBeSave) {
         try {
-            TaskListEncoder.encodeTaskList(taskToBeSave, dukeTextFilePath);
+            TaskListEncoder.encodeTask(taskToBeSave, dukeTextFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveAllTask(List<Task> allTask) {
+        try {
+            TaskListEncoder.encodeTaskList(allTask, dukeTextFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }

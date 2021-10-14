@@ -7,14 +7,14 @@ import ui.Ui;
 
 public class IncorrectCommand extends Command{
 
-   private String erroMessage;
+   private String errorMessage;
 
    public IncorrectCommand(String errorMsg){
-       this.erroMessage = errorMsg;
+       this.errorMessage = errorMsg;
    }
 
    @Override
     public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
-       throw new DukeException(erroMessage);
+       throw new DukeException(errorMessage);
     }
 }

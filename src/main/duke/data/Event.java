@@ -8,6 +8,10 @@ public class Event extends Task {
         this.by = by;
     }
 
+    public String getBy() {
+        return by;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() +"(at: " + by + ")";

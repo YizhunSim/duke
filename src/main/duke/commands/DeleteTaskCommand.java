@@ -15,7 +15,7 @@ public class DeleteTaskCommand extends Command{
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         // Get task description before deletion!
         String taskToBeDeleted = taskList.deleteTask(targetDeleteIndex);
-        //storage.saveTask(taskList);
+        storage.saveAllTask(taskList.getTask());
         ui.showDeletedTask(taskToBeDeleted);
         ui.printTaskCount(taskList.getTotalListCount());
     }

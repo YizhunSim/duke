@@ -79,7 +79,7 @@ public class Ui {
     }
 
     // Combines addToDo Print into one function
-    public void printAddTodo(String task, int taskListCount){
+    public void printAddSingleTask(String task, int taskListCount){
         showNewlyAddedTask();
         printTask(task);
         printTaskCount(taskListCount);

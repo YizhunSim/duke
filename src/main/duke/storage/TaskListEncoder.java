@@ -6,6 +6,8 @@ import data.exception.DukeException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Encodes the {@code TaskList} object into a data file for storage.
@@ -16,12 +18,29 @@ public class TaskListEncoder {
      * Encodes all the {@code Task} in the {@code toSave} into a list of decodable and readable string presentation
      * for storage.
      */
-    public static void encodeTaskList(Task toSave, String pathOfFileToSave) throws IOException {
+    public static void encodeTaskList(List<Task> toSave, String pathOfFileToSave) throws IOException{
+        final List<String> encodedTaskList = new ArrayList<>();
+        FileWriter fw = new FileWriter(pathOfFileToSave, false);
+        BufferedWriter bw = new BufferedWriter(fw);
+        for(Task individualTask : toSave){
+            encodedTaskList.add(encodeTaskToString(individualTask));
+        }
+        for(String singleTask : encodedTaskList){
+            bw.write(singleTask);
+            bw.newLine();
+        }
+        bw.close();
+    }
+    /**
+     * Encodes a single {@code Task} in the {@code toSave} into a decodable and readable string presentation
+     * for storage.
+     */
+    public static void encodeTask(Task toSave, String pathOfFileToSave) throws IOException {
         try {
             String encodedTask = encodeTaskToString(toSave);
             FileWriter fw = new FileWriter(pathOfFileToSave, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(encodedTask);
+            bw.write(  encodedTask);
             bw.newLine();
             bw.close();
         } catch (Exception e){
@@ -44,10 +63,16 @@ public class TaskListEncoder {
         else if (task instanceof Deadline){
             encodedTaskBuilder.append(TaskListEnum.D);
             encodedTaskBuilder = appendEncodedTask(encodedTaskBuilder, task);
+            Deadline d = (Deadline)task;
+            encodedTaskBuilder.append(" | ");
+            encodedTaskBuilder.append(d.getBy());
         }
         else if (task instanceof Event){
             encodedTaskBuilder.append(TaskListEnum.E);
             encodedTaskBuilder = appendEncodedTask(encodedTaskBuilder, task);
+            Event e = (Event)task;
+            encodedTaskBuilder.append(" | ");
+            encodedTaskBuilder.append(e.getBy());
         }
         return encodedTaskBuilder.toString();
     }
@@ -57,15 +82,9 @@ public class TaskListEncoder {
         sb.append(task.getStatusIcon().equals("x") ? "1" : 0);
         sb.append(" | ");
         sb.append(task.getTaskDescription());
+
         return sb;
     }
 
-//    private static String encodeTaskStatusToString(String taskStatus){
-//        if (taskStatus.equals("X")){
-//            return "1";
-//        }else{
-//            return "0";
-//        }
-//    }
 
 }

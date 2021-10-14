@@ -16,6 +16,6 @@ public class AddEventCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage){
         taskList.addTask(task);
         storage.saveTask(taskList.getLatestAddedTask());
-        ui.printAddTodo(task.getTaskDescription(), taskList.getTotalListCount());
+        ui.printAddSingleTask(task.getTaskDescription(), taskList.getTotalListCount());
     }
 }
