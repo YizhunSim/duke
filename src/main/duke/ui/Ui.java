@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import data.Task;
 
+/**
+ * Text UI of the application.
+ */
 public class Ui {
     private static final String DIVIDER = "____________________________________________________________";
     private static final String DUKE_SPLASHSCREEN =
@@ -34,14 +37,27 @@ public class Ui {
         this.out = out;
     }
 
+    /**
+     * Generates and prints the welcome duke message upon the start of the application.
+     *
+     */
     public void showWelcome(){
         out.println(DUKE_SPLASHSCREEN);
     }
 
+    /**
+     * Shows error message upon failure to load Duke Application
+     *
+     */
     public void showLoadingError(){
         out.println(MESSAGE_INIT_FAILED);
     }
 
+    /**
+     * Shows error message fed in
+     *
+     * @param errorMessage Error Message to be shown to the user
+     */
     public void showError(String errorMessage){
         out.println(errorMessage);
     }
@@ -50,6 +66,10 @@ public class Ui {
         out.println(INVALID_INPUT_USER);
     }
 
+    /**
+     * Shows Divider Line
+     *
+     */
     public void showLine(){
         out.println(DIVIDER);
     }
@@ -58,17 +78,28 @@ public class Ui {
         return in.nextLine();
     }
 
+    /**
+     * Shows all the Task in the TaskList
+     *
+     */
     public void printAllTasks(List<Task> taskList){
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(i + 1 + ". " + taskList.get(i));
         }
     }
 
+    /**
+     * Shows all the Total Task Count in the TaskList
+     *
+     */
     public void printTaskCount(int taskCount){
         System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
-    // Combines addToDo Print into one function
+    /**
+     * Shows the Task, together with the taskList total count once it is added
+     *
+     */
     public void printAddSingleTask(Task task, int taskListCount){
         showLine();
         out.println(" Got it. I've added this task:");
@@ -76,21 +107,40 @@ public class Ui {
         printTaskCount(taskListCount);
     }
 
+    /**
+     * Shows goodbye message
+     *
+     */
     public void showGoodByeMessage(){
         out.println("____________________________________________________________\n"
                 + " Bye. Hope to see you again soon!\n");
     }
 
+    /**
+     * Shows Deleted Task
+     *
+     * @param deletedTask Task that will be deleted
+     */
     public void showDeletedTask(String deletedTask){
         out.println(deletedTask);
     }
 
+    /**
+     * Shows Tasks once it is mark done
+     *
+     * @param task Task that will be mark done
+     */
     public void showMarkDoneTask(Task task){
         showLine();
         out.println(" Nice! I've marked this task as done:");
         out.println(task.toString());
     }
 
+    /**
+     * Shows All the Tasks group by the same date
+     *
+     * @param TasksOfSameDates TaskList With similar date
+     */
     public void showTasksOnSpecificDate(List<Task> TasksOfSameDates){
         showLine();
         for(Task t: TasksOfSameDates){

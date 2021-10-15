@@ -2,6 +2,7 @@ package commands;
 
 import data.Task;
 import data.TaskList;
+import data.exception.StorageOperationException;
 import storage.Storage;
 import ui.Ui;
 
@@ -13,7 +14,7 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws StorageOperationException {
         taskList.addTask(task);
         storage.saveTask(taskList.getLatestAddedTask());
         ui.printAddSingleTask(task, taskList.getTotalListCount());

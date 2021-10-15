@@ -5,7 +5,6 @@ import static common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,9 +23,15 @@ public class Parser {
     public static final Pattern ADD_TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("\\b(todo)\\b (?<todoDetails>.*)|\\b(deadline|event)\\b (?<deadlineEventDetails>.*) (\\/(?<deadlineEventDate>.*))"); // variable number of tags
 
+    /**
+     * Used for initial separation of deadline description and deadline date.
+     */
     public static final Pattern ADD_DEADLINE_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<deadlineDescription>.*) ((\\/by) (?<deadlineDate>.*))"); // variable number of tags
 
+    /**
+     * Used for initial separation of event description and event date.
+     */
     public static final Pattern ADD_EVENT_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<eventDescription>.*) ((\\/at) (?<eventDate>.*))"); // variable number of tags
 
@@ -79,6 +84,12 @@ public class Parser {
         return new ListCommand();
     }
 
+    /**
+     * Parses arguments in the context of the add task [todo] command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private static Command doAddToDoCommand(String args){
         try{
             return new AddToDoCommand(new Todo(args));
@@ -87,6 +98,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments in the context of the add task [deadline] command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private static Command doAddDeadlineCommand(String args){
         try{
             final Matcher matcher = ADD_DEADLINE_DATA_ARGS_FORMAT.matcher(args.trim());
@@ -105,6 +122,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments in the context of the add task [event] command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private static Command doAddEventCommand(String args){
         try{
             final Matcher matcher = ADD_EVENT_DATA_ARGS_FORMAT.matcher(args.trim());
@@ -123,6 +146,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments in the context of the mark as completed task [done] command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private static Command doDoneTaskCommand(String args){
         try{
             int targetIndex = Integer.parseInt((args));
@@ -132,6 +161,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments in the context of the [delete] task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private static Command doDeleteTaskCommand(String args){
         try{
             int targetIndex = Integer.parseInt((args));
@@ -141,6 +176,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments in the context of the find task by specific date [find] command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private static Command doFindTaskBySpecificDate(String args){
         try{
             LocalDate dt = parseStringFindDateFromText(args);
@@ -151,8 +192,8 @@ public class Parser {
     }
 
     /**
-     * Parses a String date into LocalDate object
-     * Example: (2021-10-15 to Oct 15 2021)
+     * Parses a String date of format d/MM/yyyy into LocalDate object
+     * Example: (2/10/2021 to Oct 2 2021)
      *
      * @param dateTime String
      * @return Converted String date into a LocalDate object
@@ -163,6 +204,13 @@ public class Parser {
         return d;
     }
 
+    /**
+     * Parses a String date of format d/MM/yyyy HHMM into LocalDate object
+     * Example: (2/10/2021 0800 to Oct 2 2021 0800)
+     *
+     * @param dateTime String
+     * @return Converted String date into a LocalDate object
+     */
     public static LocalDateTime parseStringDateFromText (String dateTime){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         LocalDateTime dateTimeResult = LocalDateTime.parse(dateTime, formatter);

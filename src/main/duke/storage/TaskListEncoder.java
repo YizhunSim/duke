@@ -1,7 +1,6 @@
 package storage;
 
 import data.*;
-import data.exception.DukeException;
 import parser.Parser;
 
 import java.io.BufferedWriter;
@@ -53,7 +52,7 @@ public class TaskListEncoder {
     /**
      * Encodes the {@code task} into a decodable and readable string representation
      * @param task
-     * @return
+     * @return the encoded task in String to be store back into the text file
      */
     private static String encodeTaskToString(Task task){
         StringBuilder encodedTaskBuilder = new StringBuilder();
@@ -78,6 +77,12 @@ public class TaskListEncoder {
         return encodedTaskBuilder.toString();
     }
 
+    /**
+     * Helper method that construct the String for the encoded Task in the text field
+     * @param sb StringBuilder
+     * @param task Task
+     * @return Partial Construction of the task in the specified txt file
+     */
     private static StringBuilder appendEncodedTask(StringBuilder sb, Task task){
         sb.append(" | ");
         sb.append(task.getIsDone() ? "1" : 0);

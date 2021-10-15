@@ -12,13 +12,22 @@ import java.util.List;
 import data.Task;
 import data.TaskList;
 import data.exception.DukeException;
+import data.exception.StorageOperationException;
 
+/**
+ * Represents the file used to store Duke's Chat Bot Task List data.
+ */
 public class Storage {
     private File f;
     private String dukeTextFilePath;
     public final String home = System.getProperty(("user.home"));
     private Path path;
 
+    /**
+     * Constructor for Storage Class
+     *
+     *  @param filePath passed in from Duke Main
+     */
     public Storage(String filePath){
 
         try{
@@ -47,23 +56,44 @@ public class Storage {
         }
     }
 
-    public List<Task> load() throws IOException, DukeException {
-        return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
+    /**
+     * Loads the {@code TaskList} data from this storage file, and then returns it.
+     * Returns an empty {@code TaskList} if the file does not exist, or is not a regular file.
+     *
+     * @throws StorageOperationException, if there were errors reading and/or converting data from file.
+     */
+    public List<Task> load() throws StorageOperationException {
+        try{
+            return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
+        } catch (IOException | DukeException e){
+            throw new StorageOperationException("Error writing to file upon load: "+ dukeTextFilePath);
+        }
+
     }
 
-    public void saveTask(Task taskToBeSave) {
+    /**
+     * Saves the {@code Task} data to the storage file.
+     *
+     * @throws StorageOperationException if there were errors converting and/or storing data to file.
+     */
+    public void saveTask(Task taskToBeSave) throws StorageOperationException{
         try {
             TaskListEncoder.encodeTask(taskToBeSave, dukeTextFilePath);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new StorageOperationException("Error writing to file upon saveTask: "+ dukeTextFilePath);
         }
     }
 
-    public void saveAllTask(List<Task> allTask) {
+    /**
+     * Saves the {@code TaskList} data to the storage file.
+     *
+     * @throws StorageOperationException if there were errors converting and/or storing data to file.
+     */
+    public void saveAllTask(List<Task> allTask) throws StorageOperationException{
         try {
             TaskListEncoder.encodeTaskList(allTask, dukeTextFilePath);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new StorageOperationException("Error writing to file upon saveAllTask: "+ dukeTextFilePath);
         }
     }
 }

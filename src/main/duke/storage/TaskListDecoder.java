@@ -11,6 +11,7 @@ import data.Event;
 import data.Todo;
 
 import data.Task;
+import data.exception.StorageOperationException;
 import parser.Parser;
 
 /**
@@ -20,7 +21,12 @@ public class TaskListDecoder {
     public static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("((^[DE]) \\| ([0-1]) \\| (.*\\|) (.*))|((^[T]) \\| ([0-1]) \\| (.*))");
 
-    public static List<Task> decodeTaskList(List<String> encodedTaskList) throws DukeException {
+    /**
+     * Decodes {@code encodedTaskList} into an {@code List<Task>} containing the decoded tasks.
+     *
+     * @throws StorageOperationException if the {@code encodedAddressBook} is in an invalid format.
+     */
+    public static List<Task> decodeTaskList(List<String> encodedTaskList) throws StorageOperationException {
         final List<Task> decodedTasks = new ArrayList<>();
         for (String encodedTask : encodedTaskList){
             decodedTasks.add(decodeTaskFromString(encodedTask));
@@ -28,10 +34,15 @@ public class TaskListDecoder {
         return decodedTasks;
     }
 
-    private static Task decodeTaskFromString(String encodedTask) throws DukeException {
+    /**
+     * Decodes {@code encodedTask} into an {@code Task} containing the a single decoded tasks.
+     *
+     * @throws StorageOperationException if the {@code encodedTask} is in an invalid format.
+     */
+    private static Task decodeTaskFromString(String encodedTask) throws StorageOperationException {
         final Matcher matcher = TASK_DATA_ARGS_FORMAT.matcher(encodedTask);
         if (!matcher.matches()) {
-            throw new DukeException("Encoded task in invalid format. Unable to decode");
+            throw new StorageOperationException("Encoded task in invalid format. Unable to decode");
         }
         Task newTask = null;
         String[] data = encodedTask.split("[|]");
