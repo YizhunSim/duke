@@ -1,5 +1,7 @@
 package data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,5 +44,24 @@ public class TaskList {
 
     public Task getTask(int taskIndex){
         return allTasks.get(taskIndex);
+    }
+
+    public List<Task> retrieveTasksByDate (LocalDate dateTime){
+        List<Task> tasksGroupBySpecificDate = new ArrayList<>();
+        for (Task singleTask : allTasks){
+            if (singleTask instanceof Deadline ){ // Only Deadline and Events have date attributes
+                Deadline d = (Deadline)singleTask;
+                if (d.getBy().toLocalDate().equals(dateTime)){
+                    tasksGroupBySpecificDate.add(singleTask);
+                }
+            }
+            else if (singleTask instanceof Event){ // Only Deadline and Events have date attributes
+                Event e = (Event)singleTask;
+                if (e.getBy().toLocalDate().equals(dateTime)){
+                    tasksGroupBySpecificDate.add(singleTask);
+                }
+            }
+        }
+        return tasksGroupBySpecificDate;
     }
 }

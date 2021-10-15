@@ -2,6 +2,7 @@ package storage;
 
 import data.*;
 import data.exception.DukeException;
+import parser.Parser;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Encodes the {@code TaskList} object into a data file for storage.
+ * Encodes the {@code TaskList} object into a data file [tasks.txt] for storage.
  */
 public class TaskListEncoder {
 
@@ -65,14 +66,14 @@ public class TaskListEncoder {
             encodedTaskBuilder = appendEncodedTask(encodedTaskBuilder, task);
             Deadline d = (Deadline)task;
             encodedTaskBuilder.append(" | ");
-            encodedTaskBuilder.append(d.getBy());
+            encodedTaskBuilder.append(Parser.parseDateForStorage(d.getBy()));
         }
         else if (task instanceof Event){
             encodedTaskBuilder.append(TaskListEnum.E);
             encodedTaskBuilder = appendEncodedTask(encodedTaskBuilder, task);
             Event e = (Event)task;
             encodedTaskBuilder.append(" | ");
-            encodedTaskBuilder.append(e.getBy());
+            encodedTaskBuilder.append(Parser.parseDateForStorage(e.getBy()));
         }
         return encodedTaskBuilder.toString();
     }

@@ -91,4 +91,11 @@ public class Ui {
         out.println(task.toString());
     }
 
+    public void showTasksOnSpecificDate(List<Task> TasksOfSameDates){
+        showLine();
+        for(Task t: TasksOfSameDates){
+            out.println(t.toString());
+        }
+    }
+
 }

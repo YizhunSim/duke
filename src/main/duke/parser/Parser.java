@@ -2,6 +2,9 @@ package parser;
 
 import static common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -62,6 +65,8 @@ public class Parser {
                 return doDeleteTaskCommand(arguments);
             case DONE:
                 return doDoneTaskCommand(arguments);
+            case FIND:
+                return doFindTaskBySpecificDate(arguments);
             case BYE:
                 return new ExitCommand();
             default:
@@ -92,7 +97,7 @@ public class Parser {
             String deadlineDescription = matcher.group("deadlineDescription").trim();
             String deadlineDate = matcher.group("deadlineDate").trim();
 
-            Task task = new Deadline(deadlineDescription, deadlineDate);
+            Task task = new Deadline(deadlineDescription, parseStringDateFromText(deadlineDate));
             return new AddDeadlineCommand(task);
 
         }catch(Exception e){
@@ -110,7 +115,7 @@ public class Parser {
             String eventDescription = matcher.group("eventDescription").trim();
             String eventDate = matcher.group("eventDate").trim();
 
-            Task task = new Event(eventDescription, eventDate);
+            Task task = new Event(eventDescription, parseStringDateFromText(eventDate));
             return new AddDeadlineCommand(task);
 
         }catch(Exception e){
@@ -135,6 +140,60 @@ public class Parser {
             return new IncorrectCommand("Task cannot be deleted");
         }
     }
+
+    private static Command doFindTaskBySpecificDate(String args){
+        try{
+            LocalDate dt = parseStringFindDateFromText(args);
+            return new FindTasksByDateCommand(dt);
+        } catch (Exception e){
+            return new IncorrectCommand("Find Task by specific date encountered exception");
+        }
+    }
+
+    /**
+     * Parses a String date into LocalDate object
+     * Example: (2021-10-15 to Oct 15 2021)
+     *
+     * @param dateTime String
+     * @return Converted String date into a LocalDate object
+     */
+    public static LocalDate parseStringFindDateFromText (String dateTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        LocalDate d = LocalDate.parse(dateTime, formatter);
+        return d;
+    }
+
+    public static LocalDateTime parseStringDateFromText (String dateTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        LocalDateTime dateTimeResult = LocalDateTime.parse(dateTime, formatter);
+        return dateTimeResult;
+    }
+
+    /**
+     * Parses a LocalDateTime object into meaningful date String format MMM dd yyyy.
+     * Example: (2021-10-15 to Oct 15 2021)
+     *
+     * @param dateTime LocalDateTime object
+     * @return Converted LocalDateTime into String Date format
+     */
+    public static String parseDateForDisplay (LocalDateTime dateTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm a");
+        return dateTime.format(formatter);
+    }
+
+    /**
+     * Parses a LocalDateTime object into meaningful date String format d/MM/yyyy HHmm.
+     * Example: (2021-10-15 600PM to 15/12/2021 1800)
+     *
+     * @param dateTime LocalDateTime object
+     * @return Converted LocalDateTime into String Date format
+     */
+    public static String parseDateForStorage (LocalDateTime dateTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        return dateTime.format(formatter);
+    }
+
+
 
 
 

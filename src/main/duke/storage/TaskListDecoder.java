@@ -11,6 +11,7 @@ import data.Event;
 import data.Todo;
 
 import data.Task;
+import parser.Parser;
 
 /**
  * Decodes the storage file into an {@code TaskList} object.
@@ -45,13 +46,13 @@ public class TaskListDecoder {
             }
         } else if (typeOfTask.equals(TaskListEnum.D.toString())) { //Deadline Task
             String deadlineDate = data[3].trim();
-            newTask = new Deadline(taskDescription, deadlineDate);
+            newTask = new Deadline(taskDescription, Parser.parseStringDateFromText(deadlineDate));
             if (taskStatus.equals("1")) {
                 newTask.markAsDone();
             }
         } else if (typeOfTask.equals(TaskListEnum.E.toString())) { //Event Task
             String eventDate = data[3].trim();
-            newTask = new Event(taskDescription, eventDate);
+            newTask = new Event(taskDescription, Parser.parseStringDateFromText(eventDate));
             if (taskStatus.equals("1")) {
                 newTask.markAsDone();
             }

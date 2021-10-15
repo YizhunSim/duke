@@ -1,19 +1,29 @@
 package data;
 
-public class Event extends Task {
-    protected String by;
+import parser.Parser;
 
-    public Event(String description, String by) {
+import java.time.LocalDateTime;
+
+public class Event extends Task {
+    protected LocalDateTime by;
+    protected String displayDateTime;
+
+    public Event(String description, LocalDateTime by) {
         super(description);
         this.by = by;
+
     }
 
-    public String getBy() {
-        return by;
+    public String getDisplayDateTime() {
+        return this.displayDateTime = Parser.parseDateForDisplay(by);
+    }
+
+    public LocalDateTime getBy(){
+        return this.by;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() +" (at: " + by + ")";
+        return "[E]" + super.toString() +" (at: " + getDisplayDateTime() + ")";
     }
 }
