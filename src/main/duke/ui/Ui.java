@@ -64,24 +64,15 @@ public class Ui {
         }
     }
 
-    public void showNewlyAddedTask(){
-        showLine();
-        out.println(" Got it. I've added this task:");
-
-    }
-
-    public void printTask(String task){
-        out.println("   " + task); // Get the latest added task from the taskList
-    }
-
     public void printTaskCount(int taskCount){
         System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
     // Combines addToDo Print into one function
-    public void printAddSingleTask(String task, int taskListCount){
-        showNewlyAddedTask();
-        printTask(task);
+    public void printAddSingleTask(Task task, int taskListCount){
+        showLine();
+        out.println(" Got it. I've added this task:");
+        out.println("   " + task);
         printTaskCount(taskListCount);
     }
 
@@ -92,6 +83,12 @@ public class Ui {
 
     public void showDeletedTask(String deletedTask){
         out.println(deletedTask);
+    }
+
+    public void showMarkDoneTask(Task task){
+        showLine();
+        out.println(" Nice! I've marked this task as done:");
+        out.println(task.toString());
     }
 
 }

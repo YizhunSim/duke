@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import commands.*;
 import data.Deadline;
+import data.Event;
 import data.Task;
 import data.Todo;
 
@@ -21,10 +22,10 @@ public class Parser {
             Pattern.compile("\\b(todo)\\b (?<todoDetails>.*)|\\b(deadline|event)\\b (?<deadlineEventDetails>.*) (\\/(?<deadlineEventDate>.*))"); // variable number of tags
 
     public static final Pattern ADD_DEADLINE_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<deadlineDescription>.*) (\\/(?<deadlineDate>.*))"); // variable number of tags
+            Pattern.compile("(?<deadlineDescription>.*) ((\\/by) (?<deadlineDate>.*))"); // variable number of tags
 
     public static final Pattern ADD_EVENT_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<eventDescription>.*) (\\/(?<eventDate>.*))"); // variable number of tags
+            Pattern.compile("(?<eventDescription>.*) ((\\/at) (?<eventDate>.*))"); // variable number of tags
 
     /**
      * Parses user input into command for execution.
@@ -59,6 +60,8 @@ public class Parser {
                 return doAddEventCommand(arguments);
             case DELETE:
                 return doDeleteTaskCommand(arguments);
+            case DONE:
+                return doDoneTaskCommand(arguments);
             case BYE:
                 return new ExitCommand();
             default:
@@ -107,11 +110,20 @@ public class Parser {
             String eventDescription = matcher.group("eventDescription").trim();
             String eventDate = matcher.group("eventDate").trim();
 
-            Task task = new Deadline(eventDescription, eventDate);
+            Task task = new Event(eventDescription, eventDate);
             return new AddDeadlineCommand(task);
 
         }catch(Exception e){
             return new IncorrectCommand("Task cannot be added. No description details");
+        }
+    }
+
+    private static Command doDoneTaskCommand(String args){
+        try{
+            int targetIndex = Integer.parseInt((args));
+            return new DoneTaskCommand(targetIndex - 1);
+        } catch (Exception e){
+            return new IncorrectCommand("Task cannot be mark as done!");
         }
     }
 

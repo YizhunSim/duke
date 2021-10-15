@@ -14,7 +14,7 @@ public class TaskList {
         this.allTasks = new ArrayList<>(Tasks);
     }
 
-    public List<Task> getTask(){
+    public List<Task> getAllTask(){
         return allTasks;
     }
 
@@ -34,5 +34,13 @@ public class TaskList {
 
     public Task getLatestAddedTask(){
         return allTasks.get(getTotalListCount()-1);
+    }
+
+    public void markAsDoneTask(int taskToMarkDone){
+        allTasks.get(taskToMarkDone).markAsDone();
+    }
+
+    public Task getTask(int taskIndex){
+        return allTasks.get(taskIndex);
     }
 }

@@ -16,6 +16,6 @@ public class AddDeadlineCommand extends Command{
     public void execute(TaskList taskList, Ui ui, Storage storage){
         taskList.addTask(task);
         storage.saveTask(taskList.getLatestAddedTask());
-        ui.printAddSingleTask(task.getTaskDescription(), taskList.getTotalListCount());
+        ui.printAddSingleTask(task, taskList.getTotalListCount());
     }
 }

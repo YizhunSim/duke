@@ -24,6 +24,10 @@ public abstract class Task {
         return this.description;
     }
 
+    public boolean getIsDone(){
+        return this.isDone;
+    }
+
     @Override
     public String toString() {
         return  "["+ getStatusIcon() + "] " + getTaskDescription();

@@ -79,7 +79,7 @@ public class TaskListEncoder {
 
     private static StringBuilder appendEncodedTask(StringBuilder sb, Task task){
         sb.append(" | ");
-        sb.append(task.getStatusIcon().equals("x") ? "1" : 0);
+        sb.append(task.getIsDone() ? "1" : 0);
         sb.append(" | ");
         sb.append(task.getTaskDescription());
 
