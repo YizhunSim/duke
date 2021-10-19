@@ -7,12 +7,12 @@ import ui.Ui;
 import data.TaskList;
 import data.exception.DukeException;
 
-public class Main {
+public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
 
-    public Main(String filePath){
+    public Duke(String filePath){
         ui = new Ui();
         storage = new Storage(filePath);
         try{
@@ -45,7 +45,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        new Main("data/tasks.txt").run();
+        new Duke("data/tasks.txt").run();
     }
 
 }
