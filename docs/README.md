@@ -2,9 +2,9 @@
 
 ## Features 
 
-### Feature-ABC
+### Feature-List Command
 
-Description of the feature.
+List all the tasks in the TaskList
 
 ### Feature-XYZ
 
