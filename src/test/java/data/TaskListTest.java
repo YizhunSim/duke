@@ -174,7 +174,7 @@ public class TaskListTest {
         taskList.addTask(t2);
         taskList.addTask(t3);
 
-        assertEquals(t2, taskList.getTask(validTaskId));
+        assertEquals(t2, taskList.getTask(validTaskId-1));
     }
 
     @Test

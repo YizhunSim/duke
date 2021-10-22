@@ -39,8 +39,8 @@ public class Storage {
 
     public void Init() throws StorageOperationException{
         try{
-            path = Paths.get(home, "duke3", filePath);
-            dataAbsoluteFilePath = Paths.get(home, "duke3", filePath).toString();
+            path = Paths.get(home, "duke", filePath);
+            dataAbsoluteFilePath = Paths.get(home, "duke", filePath).toString();
 
             boolean directoryExists = Files.exists(path);
             if (directoryExists){
