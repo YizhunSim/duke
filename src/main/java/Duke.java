@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 import commands.Command;
+import data.exception.StorageOperationException;
 import parser.Parser;
 import storage.Storage;
 import ui.Ui;
@@ -17,7 +18,7 @@ public class Duke {
         storage = new Storage(filePath);
         try{
             taskList = new TaskList(storage.load());
-        }catch(DukeException e){
+        }catch(StorageOperationException e){
             ui.showLoadingError();
             taskList = new TaskList();
             ui.showError(e.getMessage());

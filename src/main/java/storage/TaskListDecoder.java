@@ -57,13 +57,13 @@ public class TaskListDecoder {
             }
         } else if (typeOfTask.equals(TaskListEnum.D.toString())) { //Deadline Task
             String deadlineDate = data[3].trim();
-            newTask = new Deadline(taskDescription, Parser.parseStringDateFromText(deadlineDate));
+            newTask = new Deadline(taskDescription, Parser.parseStringDateTimeFromText(deadlineDate));
             if (taskStatus.equals("1")) {
                 newTask.markAsDone();
             }
         } else if (typeOfTask.equals(TaskListEnum.E.toString())) { //Event Task
             String eventDate = data[3].trim();
-            newTask = new Event(taskDescription, Parser.parseStringDateFromText(eventDate));
+            newTask = new Event(taskDescription, Parser.parseStringDateTimeFromText(eventDate));
             if (taskStatus.equals("1")) {
                 newTask.markAsDone();
             }

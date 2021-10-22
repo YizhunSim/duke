@@ -18,9 +18,10 @@ import data.exception.StorageOperationException;
  * Represents the file used to store Duke's Chat Bot Task List data.
  */
 public class Storage {
-    private File f;
-    private String dukeTextFilePath;
     public final String home = System.getProperty(("user.home"));
+    private String filePath;
+    private String dataAbsoluteFilePath;
+    private File f;
     private Path path;
 
     /**
@@ -28,17 +29,24 @@ public class Storage {
      *
      *  @param filePath passed in from Duke Main
      */
-    public Storage(String filePath){
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
 
+    public String getFilePath(){
+        return this.filePath;
+    }
+
+    public void Init() throws StorageOperationException{
         try{
-            path = Paths.get(home, "duke", filePath);
-            boolean directoryExists = Files.exists(path);
-            dukeTextFilePath = Paths.get(home, "duke", filePath).toString();
+            path = Paths.get(home, "duke3", filePath);
+            dataAbsoluteFilePath = Paths.get(home, "duke3", filePath).toString();
 
+            boolean directoryExists = Files.exists(path);
             if (directoryExists){
                 // Read file
                 System.out.println("Storage File Constructor: Read file");
-                f = new File(dukeTextFilePath);
+                f = new File(dataAbsoluteFilePath);
                 Scanner s = new Scanner(f);
                 while (s.hasNext()){
                     System.out.println(s.nextLine());
@@ -49,12 +57,11 @@ public class Storage {
                 Files.createDirectory(path.getParent());
                 Files.createFile(path);
             }
-        } catch (FileNotFoundException ex){
-            System.out.println(ex.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
+        }  catch (IOException ex) {
+            throw new StorageOperationException((ex.getMessage()));
         }
     }
+
 
     /**
      * Loads the {@code TaskList} data from this storage file, and then returns it.
@@ -63,10 +70,11 @@ public class Storage {
      * @throws StorageOperationException, if there were errors reading and/or converting data from file.
      */
     public List<Task> load() throws StorageOperationException {
+        Init();
         try{
             return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
         } catch (IOException | DukeException e){
-            throw new StorageOperationException("Error writing to file upon load: "+ dukeTextFilePath);
+            throw new StorageOperationException("Error writing to file upon load: "+ dataAbsoluteFilePath);
         }
 
     }
@@ -78,9 +86,9 @@ public class Storage {
      */
     public void saveTask(Task taskToBeSave) throws StorageOperationException{
         try {
-            TaskListEncoder.encodeTask(taskToBeSave, dukeTextFilePath);
+            TaskListEncoder.encodeTask(taskToBeSave, dataAbsoluteFilePath);
         } catch (IOException e) {
-            throw new StorageOperationException("Error writing to file upon saveTask: "+ dukeTextFilePath);
+            throw new StorageOperationException("Error writing to file upon saveTask: "+ dataAbsoluteFilePath);
         }
     }
 
@@ -91,9 +99,9 @@ public class Storage {
      */
     public void saveAllTask(List<Task> allTask) throws StorageOperationException{
         try {
-            TaskListEncoder.encodeTaskList(allTask, dukeTextFilePath);
+            TaskListEncoder.encodeTaskList(allTask, dataAbsoluteFilePath);
         } catch (IOException e) {
-            throw new StorageOperationException("Error writing to file upon saveAllTask: "+ dukeTextFilePath);
+            throw new StorageOperationException("Error writing to file upon saveAllTask: "+ dataAbsoluteFilePath);
         }
     }
 }

@@ -56,13 +56,13 @@ public class TaskList {
      *
      * @throws TaskNotFoundException if no such Task could be found.
      */
-    public String deleteTask(int toBeDeletedTaskId) throws TaskNotFoundException {
-        if (toBeDeletedTaskId > allTasks.size() || toBeDeletedTaskId < 1){
-            throw new TaskNotFoundException(toBeDeletedTaskId);
+    public String deleteTask(int toBeDeletedTaskIndex) throws TaskNotFoundException {
+        if (toBeDeletedTaskIndex > allTasks.size() || toBeDeletedTaskIndex < 0){
+            throw new TaskNotFoundException(toBeDeletedTaskIndex);
         }
         else{
-            String taskToBeDeleted = allTasks.get(toBeDeletedTaskId - 1).getTaskDescription();
-            allTasks.remove(toBeDeletedTaskId);
+            String taskToBeDeleted = allTasks.get(toBeDeletedTaskIndex).getTaskDescription();
+            allTasks.remove(toBeDeletedTaskIndex);
             return taskToBeDeleted;
         }
     }
@@ -77,11 +77,11 @@ public class TaskList {
     /**
      * Marks a particular task as done (Might have duplicate)
      */
-    public void markAsDoneTask(int taskToMarkDone) throws TaskNotFoundException{
-        if (taskToMarkDone > allTasks.size() || taskToMarkDone < 1){
-            throw new TaskNotFoundException(taskToMarkDone);
+    public void markAsDoneTask(int taskToMarkDoneIndex) throws TaskNotFoundException{
+        if (taskToMarkDoneIndex > allTasks.size() || taskToMarkDoneIndex < 0){
+            throw new TaskNotFoundException(taskToMarkDoneIndex);
         }else{
-            allTasks.get(taskToMarkDone - 1).markAsDone();
+            getTask(taskToMarkDoneIndex).markAsDone();
         }
     }
 
@@ -94,7 +94,7 @@ public class TaskList {
         if (taskIndex > allTasks.size() || taskIndex < 1){
             throw new TaskNotFoundException(taskIndex);
         }else{
-            return allTasks.get(taskIndex - 1);
+            return allTasks.get(taskIndex);
         }
     }
 

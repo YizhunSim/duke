@@ -114,7 +114,7 @@ public class Parser {
             String deadlineDescription = matcher.group("deadlineDescription").trim();
             String deadlineDate = matcher.group("deadlineDate").trim();
 
-            Task task = new Deadline(deadlineDescription, parseStringDateFromText(deadlineDate));
+            Task task = new Deadline(deadlineDescription, parseStringDateTimeFromText(deadlineDate));
             return new AddDeadlineCommand(task);
 
         }catch(Exception e){
@@ -138,8 +138,8 @@ public class Parser {
             String eventDescription = matcher.group("eventDescription").trim();
             String eventDate = matcher.group("eventDate").trim();
 
-            Task task = new Event(eventDescription, parseStringDateFromText(eventDate));
-            return new AddDeadlineCommand(task);
+            Task task = new Event(eventDescription, parseStringDateTimeFromText(eventDate));
+            return new AddEventCommand(task);
 
         }catch(Exception e){
             return new IncorrectCommand("Task cannot be added. No description details");
@@ -193,25 +193,26 @@ public class Parser {
 
     /**
      * Parses a String date of format d/MM/yyyy into LocalDate object
-     * Example: (2/10/2021 to Oct 2 2021)
+     * Example: (2/10/2021 to 2021-10-2)
      *
-     * @param dateTime String
+     * @param date String
      * @return Converted String date into a LocalDate object
      */
-    public static LocalDate parseStringFindDateFromText (String dateTime){
+    public static LocalDate parseStringFindDateFromText (String date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        LocalDate d = LocalDate.parse(dateTime, formatter);
+        LocalDate d = LocalDate.parse(date, formatter);
         return d;
     }
 
     /**
-     * Parses a String date of format d/MM/yyyy HHMM into LocalDate object
-     * Example: (2/10/2021 0800 to Oct 2 2021 0800)
+     * Parses a String date of format d/MM/yyyy HHMM into LocalDateTime object
+     * Example: (2/10/2021 0800 to 2021-10-2T08:00)
+     * Used in TaskListDecoder to decode task.txt tasks in TaskList with LocalDateTime attribute
      *
      * @param dateTime String
      * @return Converted String date into a LocalDate object
      */
-    public static LocalDateTime parseStringDateFromText (String dateTime){
+    public static LocalDateTime parseStringDateTimeFromText (String dateTime){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         LocalDateTime dateTimeResult = LocalDateTime.parse(dateTime, formatter);
         return dateTimeResult;
@@ -219,7 +220,7 @@ public class Parser {
 
     /**
      * Parses a LocalDateTime object into meaningful date String format MMM dd yyyy.
-     * Example: (2021-10-15 to Oct 15 2021)
+     * Example: (2021-10-15T08:00 to Oct 15 2021)
      *
      * @param dateTime LocalDateTime object
      * @return Converted LocalDateTime into String Date format
@@ -231,7 +232,8 @@ public class Parser {
 
     /**
      * Parses a LocalDateTime object into meaningful date String format d/MM/yyyy HHmm.
-     * Example: (2021-10-15 600PM to 15/12/2021 1800)
+     * Example: (2021-10-15T06:00 to 15/10/2021 0600)
+     * Used in TaskListEncoder to encode the Tasks in the TaskList to the specified format of task.txt.
      *
      * @param dateTime LocalDateTime object
      * @return Converted LocalDateTime into String Date format

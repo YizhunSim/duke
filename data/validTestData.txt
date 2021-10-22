@@ -1,0 +1,3 @@
+D | 0 | deadline description | 10/10/2021 1010
+E | 0 | event description | 10/10/2021 1010
+T | 0 | todo description

@@ -1,10 +1,12 @@
-D | 0 | return book | 2/12/2019 1800
-D | 0 | presentation | 17/10/2021 1830
+D | 1 | presentation | 17/10/2021 1830
 E | 1 | technical proposal | 18/10/2021 1700
 T | 0 | read investment
 D | 0 | week9 SE | 15/10/2021 2200
-E | 0 | Run 130km | 17/11/2021 0900
 E | 0 | Run 100km | 15/10/2021 1000
-D | 0 | read discipline equals freedom | 20/10/2021 1100
-E | 0 | terranium workshop | 16/10/2021 0230
+D | 1 | read discipline equals freedom | 20/10/2021 1100
+E | 1 | terranium workshop | 16/10/2021 0230
 T | 0 | read warren buffett essays
+T | 0 | touchup Technical proposal
+D | 0 | NusFinTech Persona Interview | 26/10/2021 0900
+E | 0 | Gemlets Birthday | 23/10/2021 1800
+T | 0 | water terranium
