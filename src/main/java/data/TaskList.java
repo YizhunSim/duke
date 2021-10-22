@@ -56,10 +56,15 @@ public class TaskList {
      *
      * @throws TaskNotFoundException if no such Task could be found.
      */
-    public String deleteTask(int toBeDeletedTask) throws TaskNotFoundException {
-        String taskToBeDeleted = allTasks.get(toBeDeletedTask).getTaskDescription();
-        allTasks.remove(toBeDeletedTask);
-        return taskToBeDeleted;
+    public String deleteTask(int toBeDeletedTaskId) throws TaskNotFoundException {
+        if (toBeDeletedTaskId > allTasks.size() || toBeDeletedTaskId < 1){
+            throw new TaskNotFoundException(toBeDeletedTaskId);
+        }
+        else{
+            String taskToBeDeleted = allTasks.get(toBeDeletedTaskId - 1).getTaskDescription();
+            allTasks.remove(toBeDeletedTaskId);
+            return taskToBeDeleted;
+        }
     }
 
     /**
@@ -72,8 +77,12 @@ public class TaskList {
     /**
      * Marks a particular task as done (Might have duplicate)
      */
-    public void markAsDoneTask(int taskToMarkDone){
-        allTasks.get(taskToMarkDone).markAsDone();
+    public void markAsDoneTask(int taskToMarkDone) throws TaskNotFoundException{
+        if (taskToMarkDone > allTasks.size() || taskToMarkDone < 1){
+            throw new TaskNotFoundException(taskToMarkDone);
+        }else{
+            allTasks.get(taskToMarkDone - 1).markAsDone();
+        }
     }
 
     /**
@@ -81,8 +90,12 @@ public class TaskList {
      *
      *  @param taskIndex external changes to this will not affect this Task List
      */
-    public Task getTask(int taskIndex){
-        return allTasks.get(taskIndex);
+    public Task getTask(int taskIndex) throws TaskNotFoundException{
+        if (taskIndex > allTasks.size() || taskIndex < 1){
+            throw new TaskNotFoundException(taskIndex);
+        }else{
+            return allTasks.get(taskIndex - 1);
+        }
     }
 
     /**
@@ -101,7 +114,7 @@ public class TaskList {
             }
             else if (singleTask instanceof Event){ // Only Deadline and Events have date attributes
                 Event e = (Event)singleTask;
-                if (e.getBy().toLocalDate().equals(dateTime)){
+                if (e.getAt().toLocalDate().equals(dateTime)){
                     tasksGroupBySpecificDate.add(singleTask);
                 }
             }

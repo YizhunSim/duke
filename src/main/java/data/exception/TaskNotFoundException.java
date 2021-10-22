@@ -1,7 +1,7 @@
 package data.exception;
 
 public class TaskNotFoundException extends DukeException{
-    public TaskNotFoundException(String errorMessage) {
-        super(errorMessage);
+    public TaskNotFoundException(int taskId) {
+        super("Task id provided: " + taskId + " does not exist.");
     }
 }

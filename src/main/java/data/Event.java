@@ -5,21 +5,21 @@ import parser.Parser;
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    protected LocalDateTime by;
+    protected LocalDateTime at;
     protected String displayDateTime;
 
     public Event(String description, LocalDateTime by) {
         super(description);
-        this.by = by;
+        this.at = by;
 
     }
 
     public String getDisplayDateTime() {
-        return this.displayDateTime = Parser.parseDateForDisplay(by);
+        return this.displayDateTime = Parser.parseDateForDisplay(at);
     }
 
-    public LocalDateTime getBy(){
-        return this.by;
+    public LocalDateTime getAt(){
+        return this.at;
     }
 
     @Override

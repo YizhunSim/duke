@@ -72,7 +72,7 @@ public class TaskListEncoder {
             encodedTaskBuilder = appendEncodedTask(encodedTaskBuilder, task);
             Event e = (Event)task;
             encodedTaskBuilder.append(" | ");
-            encodedTaskBuilder.append(Parser.parseDateForStorage(e.getBy()));
+            encodedTaskBuilder.append(Parser.parseDateForStorage(e.getAt()));
         }
         return encodedTaskBuilder.toString();
     }
