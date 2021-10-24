@@ -57,11 +57,14 @@ public class TaskList {
      * @throws TaskNotFoundException if no such Task could be found.
      */
     public String deleteTask(int toBeDeletedTaskIndex) throws TaskNotFoundException {
-        if (toBeDeletedTaskIndex > allTasks.size() || toBeDeletedTaskIndex < 0){
+        boolean hasExceededTaskListSizeLimit = toBeDeletedTaskIndex > allTasks.size();
+        boolean isOutOfBoundTaskListStartIndex = toBeDeletedTaskIndex < 0;
+
+        if (hasExceededTaskListSizeLimit || isOutOfBoundTaskListStartIndex){
             throw new TaskNotFoundException(toBeDeletedTaskIndex);
         }
         else{
-            String taskToBeDeleted = allTasks.get(toBeDeletedTaskIndex).getTaskDescription();
+            String taskToBeDeleted = allTasks.get(toBeDeletedTaskIndex).toString();
             allTasks.remove(toBeDeletedTaskIndex);
             return taskToBeDeleted;
         }
@@ -78,7 +81,10 @@ public class TaskList {
      * Marks a particular task as done (Might have duplicate)
      */
     public void markAsDoneTask(int taskToMarkDoneIndex) throws TaskNotFoundException{
-        if (taskToMarkDoneIndex > allTasks.size() || taskToMarkDoneIndex < 0){
+        boolean hasExceededTaskListSizeLimit = taskToMarkDoneIndex > allTasks.size();
+        boolean isOutOfBoundTaskListStartIndex = taskToMarkDoneIndex < 0;
+
+        if (hasExceededTaskListSizeLimit || isOutOfBoundTaskListStartIndex){
             throw new TaskNotFoundException(taskToMarkDoneIndex);
         }else{
             getTask(taskToMarkDoneIndex).markAsDone();
@@ -91,7 +97,10 @@ public class TaskList {
      *  @param taskIndex external changes to this will not affect this Task List
      */
     public Task getTask(int taskIndex) throws TaskNotFoundException{
-        if (taskIndex > allTasks.size() || taskIndex < 1){
+        boolean hasExceededTaskListSizeLimit = taskIndex > allTasks.size();
+        boolean isOutOfBoundTaskListStartIndex = taskIndex < 0;
+
+        if (hasExceededTaskListSizeLimit || isOutOfBoundTaskListStartIndex){
             throw new TaskNotFoundException(taskIndex);
         }else{
             return allTasks.get(taskIndex);

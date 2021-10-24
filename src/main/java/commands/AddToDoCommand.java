@@ -13,6 +13,12 @@ public class AddToDoCommand extends Command {
         this.task = task;
     }
 
+    public static final String COMMAND_WORD = CommandEnum.TODO.toString().toLowerCase();
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a todo task to the TaskList.\n"
+            + "Parameters: TODO_DESCRIPTION\n"
+            + "Example: " + COMMAND_WORD + " TIC2002 Project";
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws StorageOperationException {
         taskList.addTask(task);

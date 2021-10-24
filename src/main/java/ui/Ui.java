@@ -75,6 +75,7 @@ public class Ui {
     }
 
     public String readCommand(){
+        out.print("Enter command: ");
         return in.nextLine();
     }
 
@@ -145,6 +146,16 @@ public class Ui {
         showLine();
         for(Task t: TasksOfSameDates){
             out.println(t.toString());
+        }
+    }
+
+    /**
+     * Shows all available help commands with its message_usage
+     *
+     */
+    public void showCommands(List<String> commandList){
+        for (int i = 0; i < commandList.size(); i++) {
+            System.out.println(i + 1 + ". " + commandList.get(i));
         }
     }
 

@@ -58,31 +58,44 @@ public class Parser {
             return new IncorrectCommand(("Incorrect Command: "+commandWord));
         }
         switch (commandEnum) {
-            case LIST:
-                return doListCommand();
-            case TODO:
-                return doAddToDoCommand(arguments);
-            case DEADLINE:
-                return doAddDeadlineCommand(arguments);
-            case EVENT:
-                return doAddEventCommand(arguments);
-            case DELETE:
-                return doDeleteTaskCommand(arguments);
-            case DONE:
-                return doDoneTaskCommand(arguments);
-            case FIND:
-                return doFindTaskBySpecificDate(arguments);
-            case BYE:
-                return new ExitCommand();
-            default:
-                return new IncorrectCommand("Unable to execute command");
+        case LIST:
+            return doListCommand();
+        case TODO:
+            return doAddToDoCommand(arguments);
+        case DEADLINE:
+            return doAddDeadlineCommand(arguments);
+        case EVENT:
+            return doAddEventCommand(arguments);
+        case DELETE:
+            return doDeleteTaskCommand(arguments);
+        case DONE:
+            return doDoneTaskCommand(arguments);
+        case FIND:
+            return doFindTaskBySpecificDate(arguments);
+        case HELP:
+            return doHelpCommand();
+        case BYE:
+            return new ExitCommand();
+        default:
+            return new IncorrectCommand("Unable to execute command");
 
         }
     }
-
+    /**
+     * Perform list command.
+     *
+     * @return the prepared command
+     */
     private static Command doListCommand(){
         return new ListCommand();
     }
+
+    /**
+     * Perform help command.
+     *
+     * @return the prepared command
+     */
+    private static Command doHelpCommand() { return new HelpCommand();}
 
     /**
      * Parses arguments in the context of the add task [todo] command.
