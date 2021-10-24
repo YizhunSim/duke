@@ -1,12 +1,15 @@
-D | 1 | presentation | 17/10/2021 1830
 E | 1 | technical proposal | 18/10/2021 1700
-T | 0 | read investment
-D | 0 | week9 SE | 15/10/2021 2200
-E | 0 | Run 100km | 15/10/2021 1000
+T | 1 | read investment
+D | 1 | week9 SE | 15/10/2021 2200
 D | 1 | read discipline equals freedom | 20/10/2021 1100
 E | 1 | terranium workshop | 16/10/2021 0230
 T | 0 | read warren buffett essays
 T | 0 | touchup Technical proposal
 D | 0 | NusFinTech Persona Interview | 26/10/2021 0900
-E | 0 | Gemlets Birthday | 23/10/2021 1800
+E | 1 | Gemlets Birthday | 23/10/2021 1800
 T | 0 | water terranium
+D | 1 | complete Week10 SE | 24/10/2021 2359
+E | 1 | live life enjoy | 24/10/2021 1700
+D | 0 | run even if it rains | 24/10/2021 1700
+E | 0 | Boxing class | 25/10/2021 0715
+T | 0 | focus

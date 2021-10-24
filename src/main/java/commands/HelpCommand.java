@@ -6,8 +6,6 @@ import ui.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class HelpCommand extends Command{
     public static final String COMMAND_WORD = CommandEnum.HELP.toString().toLowerCase();
@@ -22,7 +20,7 @@ public class HelpCommand extends Command{
         commandNames.add(AddToDoCommand.MESSAGE_USAGE);
         commandNames.add(DeleteTaskCommand.MESSAGE_USAGE);
         commandNames.add(DoneTaskCommand.MESSAGE_USAGE);
-        commandNames.add(FindTasksByDateCommand.MESSAGE_USAGE);
+        commandNames.add(SearchTasksByDateCommand.MESSAGE_USAGE);
         commandNames.add(ListCommand.MESSAGE_USAGE);
         commandNames.add(HelpCommand.MESSAGE_USAGE);
         commandNames.add(ExitCommand.MESSAGE_USAGE);

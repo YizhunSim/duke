@@ -5,6 +5,9 @@ import static common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,8 +73,10 @@ public class Parser {
             return doDeleteTaskCommand(arguments);
         case DONE:
             return doDoneTaskCommand(arguments);
+        case SEARCH:
+            return doSearchTaskBySpecificDate(arguments);
         case FIND:
-            return doFindTaskBySpecificDate(arguments);
+            return doFindTaskByKeyword(arguments);
         case HELP:
             return doHelpCommand();
         case BYE:
@@ -190,17 +195,33 @@ public class Parser {
     }
 
     /**
-     * Parses arguments in the context of the find task by specific date [find] command.
+     * Parses arguments in the context of the search task by specific date [search] command.
      *
      * @param args full command args string
      * @return the prepared command
      */
-    private static Command doFindTaskBySpecificDate(String args){
+    private static Command doSearchTaskBySpecificDate(String args){
         try{
             LocalDate dt = parseStringFindDateFromText(args);
-            return new FindTasksByDateCommand(dt);
+            return new SearchTasksByDateCommand(dt);
         } catch (Exception e){
-            return new IncorrectCommand("Find Task by specific date encountered exception");
+            return new IncorrectCommand("Search Task by specific date encountered exception");
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the find task by keyword [find] command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private static Command doFindTaskByKeyword(String args){
+        try{
+            String[] keywords = args.split(" ");
+            Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+            return new FindTaskByKeywordCommand(keywordSet);
+        } catch (Exception e){
+            return new IncorrectCommand("Find Task by keyword encountered exception");
         }
     }
 

@@ -7,9 +7,9 @@ import ui.Ui;
 
 import java.time.LocalDate;
 
-public class FindTasksByDateCommand extends Command{
+public class SearchTasksByDateCommand extends Command{
     protected LocalDate dt ;
-    public FindTasksByDateCommand(LocalDate datetime){
+    public SearchTasksByDateCommand(LocalDate datetime){
         this.dt = datetime;
     }
 

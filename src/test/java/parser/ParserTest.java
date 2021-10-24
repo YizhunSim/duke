@@ -55,8 +55,8 @@ public class ParserTest {
     @Test
     public void parseDoFindTaskBySpecificDateCommand_validFindTaskBySpecificDateCommand_success(){
         Parser p = new Parser();
-        Command c = p.parseCommand("find 10/10/2021");
-        assertEquals(FindTasksByDateCommand.class, c.getClass());
+        Command c = p.parseCommand("search 10/10/2021");
+        assertEquals(SearchTasksByDateCommand.class, c.getClass());
     }
 
     @Test
