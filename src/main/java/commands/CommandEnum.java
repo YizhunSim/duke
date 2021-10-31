@@ -1,5 +1,5 @@
 package commands;
 
 public enum CommandEnum {
-    LIST, DONE ,TODO, DEADLINE, EVENT, DELETE, FIND, HELP, SEARCH, BYE
+    LIST, DONE ,TODO, DEADLINE, EVENT, DELETE, FIND, HELP, SEARCH, SORT, BYE
 }

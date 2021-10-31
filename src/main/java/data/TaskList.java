@@ -62,8 +62,7 @@ public class TaskList {
 
         if (hasExceededTaskListSizeLimit || isOutOfBoundTaskListStartIndex){
             throw new TaskNotFoundException(toBeDeletedTaskIndex);
-        }
-        else{
+        }else{
             String taskToBeDeleted = allTasks.get(toBeDeletedTaskIndex).toString();
             allTasks.remove(toBeDeletedTaskIndex);
             return taskToBeDeleted;
@@ -129,5 +128,31 @@ public class TaskList {
             }
         }
         return tasksGroupBySpecificDate;
+    }
+
+    /**
+     * Returns a List of task deadline.
+     */
+    public List<Task> getAllTaskDeadlines(){
+        List<Task> taskListByDeadline = new ArrayList<>();
+        for (Task singleTask : allTasks){
+            if (singleTask instanceof Deadline){
+                taskListByDeadline.add(singleTask);
+            }
+        }
+        return taskListByDeadline;
+    }
+
+    /**
+     * Returns a List of tasks event.
+     */
+    public List<Task> getAllTaskEvents(){
+        List<Task> taskListByEvent = new ArrayList<>();
+        for (Task singleTask : allTasks){
+            if (singleTask instanceof Event){
+                taskListByEvent.add(singleTask);
+            }
+        }
+        return taskListByEvent;
     }
 }

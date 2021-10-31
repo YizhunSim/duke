@@ -39,6 +39,12 @@ public class Parser {
             Pattern.compile("(?<eventDescription>.*) ((\\/at) (?<eventDate>.*))"); // variable number of tags
 
     /**
+     * Used for initial separation of what type of task to sort and how you want to sort them
+     */
+    public static final Pattern SORT_TASK_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<typeOfTask>.*) ((?<methodOfSort>.*))"); // variable number of tags
+
+    /**
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
@@ -77,6 +83,8 @@ public class Parser {
             return doSearchTaskBySpecificDate(arguments);
         case FIND:
             return doFindTaskByKeyword(arguments);
+        case SORT:
+            return doSortTaskCommand(arguments);
         case HELP:
             return doHelpCommand();
         case BYE:
@@ -101,6 +109,29 @@ public class Parser {
      * @return the prepared command
      */
     private static Command doHelpCommand() { return new HelpCommand();}
+
+    /**
+     * Parses arguments in the context of the sort task [sort] command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private static Command doSortTaskCommand(String args){
+        try{
+            final Matcher matcher = SORT_TASK_ARGS_FORMAT.matcher(args.trim());
+            if (!matcher.matches()) {
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+
+            String typeOfTask = matcher.group("typeOfTask").trim();
+            String methodOfSort = matcher.group("methodOfSort").trim();
+
+            return new SortTaskCommand(typeOfTask, methodOfSort);
+
+        }catch(Exception e){
+            return new IncorrectCommand("Task cannot be sorted.");
+        }
+    }
 
     /**
      * Parses arguments in the context of the add task [todo] command.

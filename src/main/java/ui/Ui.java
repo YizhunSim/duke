@@ -159,4 +159,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows Message
+     *
+     * @param message to be shown to user
+     */
+    public void showMessage(String message){
+        out.println(message);
+    }
+
 }

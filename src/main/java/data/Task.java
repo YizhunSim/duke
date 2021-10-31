@@ -17,14 +17,14 @@ public abstract class Task {
     }
 
     /**
-     * Used for display of Task Status Icon
+     * Retrieve Task Status
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
     /**
-     * Used to mark isDone attribute for a single Task object
+     * Method to mark task as Done for a single Task object
      */
     public void markAsDone(){
         this.isDone = true;

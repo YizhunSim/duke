@@ -1,3 +1,4 @@
+E | 0 | FinTech Presentation class | 01/11/2021 0900
 E | 1 | technical proposal | 18/10/2021 1700
 T | 1 | read investment
 D | 1 | week9 SE | 15/10/2021 2200
