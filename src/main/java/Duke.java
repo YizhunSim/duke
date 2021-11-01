@@ -13,6 +13,10 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    public Duke(){
+
+    }
+
     public Duke(String filePath){
         ui = new Ui();
         storage = new Storage(filePath);
@@ -43,6 +47,14 @@ public class Duke {
             }
         }
 
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     public static void main(String[] args) {
