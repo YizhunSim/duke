@@ -1,5 +1,6 @@
 package commands;
 
+import common.Messages;
 import data.Task;
 import data.TaskList;
 import data.exception.DukeException;
@@ -15,9 +16,12 @@ public class FindTaskByKeywordCommand extends Command{
         this.keywords = keywords;
     }
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         List<Task> tasksFound = getTaskWithDescriptionContainingAnyKeyword(keywords, taskList);
-        ui.printAllTasks(tasksFound);
+        ui.printAllTasks(taskList.getAllTaskListString(tasksFound));
+
+        return Messages.getAllTask(taskList.getAllTaskListString(tasksFound));
+
     }
 
     private List<Task> getTaskWithDescriptionContainingAnyKeyword(Set<String> keywords, TaskList taskList){

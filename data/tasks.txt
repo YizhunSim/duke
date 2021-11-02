@@ -14,3 +14,5 @@ E | 1 | live life enjoy | 24/10/2021 1700
 D | 0 | run even if it rains | 24/10/2021 1700
 E | 0 | Boxing class | 25/10/2021 0715
 T | 0 | focus
+T | 0 | prob and stats revision
+E | 0 | prob and stats tuition | 2/11/2021 1800

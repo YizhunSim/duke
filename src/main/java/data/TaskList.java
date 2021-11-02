@@ -155,4 +155,12 @@ public class TaskList {
         }
         return taskListByEvent;
     }
+
+    public List<String> getAllTaskListString (List<Task> taskList){
+        List<String> tl = new ArrayList<>();
+        for (Task t : taskList){
+            tl.add(t.toString());
+        }
+        return tl;
+    }
 }

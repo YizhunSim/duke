@@ -1,5 +1,6 @@
 package commands;
 
+import common.Messages;
 import data.TaskList;
 import data.exception.DukeException;
 import storage.Storage;
@@ -14,7 +15,8 @@ public class IncorrectCommand extends Command{
    }
 
    @Override
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
-       throw new DukeException(errorMessage);
-    }
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeException {
+       return Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+   }
 }

@@ -83,7 +83,7 @@ public class Ui {
      * Shows all the Task in the TaskList
      *
      */
-    public void printAllTasks(List<Task> taskList){
+    public void printAllTasks(List<String> taskList){
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(i + 1 + ". " + taskList.get(i));
         }
@@ -101,12 +101,13 @@ public class Ui {
      * Shows the Task, together with the taskList total count once it is added
      *
      */
-    public void printAddSingleTask(Task task, int taskListCount){
+    public void printAddSingleTask(String task, int taskListCount){
         showLine();
         out.println(" Got it. I've added this task:");
         out.println("   " + task);
         printTaskCount(taskListCount);
     }
+
 
     /**
      * Shows goodbye message
@@ -131,10 +132,10 @@ public class Ui {
      *
      * @param task Task that will be mark done
      */
-    public void showMarkDoneTask(Task task){
+    public void showMarkDoneTask(String task){
         showLine();
         out.println(" Nice! I've marked this task as done:");
-        out.println(task.toString());
+        out.println(task);
     }
 
     /**
@@ -142,10 +143,10 @@ public class Ui {
      *
      * @param TasksOfSameDates TaskList With similar date
      */
-    public void showTasksOnSpecificDate(List<Task> TasksOfSameDates){
+    public void showTasksOnSpecificDate(List<String> TasksOfSameDates){
         showLine();
-        for(Task t: TasksOfSameDates){
-            out.println(t.toString());
+        for(String t: TasksOfSameDates){
+            out.println(t);
         }
     }
 

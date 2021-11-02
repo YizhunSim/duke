@@ -1,10 +1,12 @@
 package commands;
 
+import common.Messages;
 import data.Task;
 import data.TaskList;
 import data.exception.StorageOperationException;
 import storage.Storage;
 import ui.Ui;
+
 
 public class AddDeadlineCommand extends Command{
     private Task task;
@@ -21,9 +23,18 @@ public class AddDeadlineCommand extends Command{
             + "Example: "
             + COMMAND_WORD + " TIC2002 Project /by 01/11/2021 2359";
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws StorageOperationException {
-        taskList.addTask(task);
-        storage.saveTask(taskList.getLatestAddedTask());
-        ui.printAddSingleTask(task, taskList.getTotalListCount());
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws StorageOperationException {
+        try{
+            taskList.addTask(task);
+            storage.saveTask(taskList.getLatestAddedTask());
+            ui.printAddSingleTask(task.toString(), taskList.getTotalListCount()); // Message will still be printed in console
+
+            return Messages.ADDED_TASK + Messages.getTask(task.toString()) + Messages.getTaskCount(taskList.getTotalListCount());
+        } catch (StorageOperationException ex){
+            ui.showError(Messages.FAIL_TO_ADD_TASK);
+            ui.showError(ex.getMessage());
+            return Messages.FAIL_TO_ADD_TASK;
+        }
+
     }
 }

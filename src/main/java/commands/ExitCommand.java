@@ -1,5 +1,6 @@
 package commands;
 
+import common.Messages;
 import data.TaskList;
 import data.exception.DukeException;
 import storage.Storage;
@@ -12,8 +13,11 @@ public class ExitCommand extends Command{
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeException {
         ui.showGoodByeMessage();
         setExit(true);
+
+        return Messages.GOODBYE_MESSAGE;
+
     }
 }
