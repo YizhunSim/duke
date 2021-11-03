@@ -56,9 +56,9 @@ public class Messages {
     public static String getAllCommands(List<String> commandList){
         String result = "";
         for (int i = 0; i < commandList.size(); i++) {
-            result += (i + 1 + ". " + commandList.get(i));
+            result += (i + 1 + ". " + commandList.get(i) +"\n");
         }
-        return result;
+        return result.trim();
     }
 
 }
