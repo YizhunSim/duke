@@ -11,8 +11,11 @@ import data.Task;
  * Text UI of the application.
  */
 public class Ui {
-    private static final String DIVIDER = "____________________________________________________________";
-    private static final String DUKE_SPLASHSCREEN =
+    private final Scanner in;
+    private final PrintStream out;
+
+    public static final String DIVIDER = "____________________________________________________________";
+    public static final String DUKE_SPLASHSCREEN =
                     DIVIDER
                     + "\n" +
                       " ____        _        \n"
@@ -23,8 +26,6 @@ public class Ui {
                     + "Hello! I'm Duke\n"
                     + "What can I do for you?\n"
                     + DIVIDER;
-    private final Scanner in;
-    private final PrintStream out;
     public static final String MESSAGE_INIT_FAILED = "Failed to initialise duke application. Exiting...";
     public static final String INVALID_INPUT_USER = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 

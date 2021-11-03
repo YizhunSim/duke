@@ -1,3 +1,4 @@
+import common.Messages;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -23,6 +25,8 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    private Circle clip;
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -32,6 +36,9 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        clip = new Circle(50.0f,50.0f,50.0f);
+        displayPicture.setClip(clip);
 
         dialog.setText(text);
         displayPicture.setImage(img);

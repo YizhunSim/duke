@@ -3,6 +3,24 @@ package common;
 import java.util.List;
 
 public class Messages {
+    public static final String DIVIDER = "_______________________________________________________";
+    public static final String DUKE_SPLASHSCREEN =
+                    DIVIDER
+                    + "\n"
+                    + "\t ____        _        \n"
+                    + "\t|  _ \\ _   _| | _____ \n"
+                    + "\t| | | | | | | |/ / _ \\\n"
+                    + "\t| |_| | |_| |   <  __/\n"
+                    + "\t|____/ \\__,_|_|\\_\\___|\n\n"
+                    + "\tHello! I'm Duke\n"
+                    + "\tWhat can I do for you?\n"
+                    + DIVIDER;
+
+
+    public static final String MESSAGE_INIT_FAILED = "Failed to initialise duke application. Exiting...";
+
+    public static final String INVALID_INPUT_USER = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!";
 
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
@@ -30,9 +48,9 @@ public class Messages {
     public static String getAllTask(List<String> taskList){
         String result = "";
         for (int i = 0; i < taskList.size(); i++) {
-            result += (i + 1 + ". " + taskList.get(i));
+            result += i + 1 + ". " + taskList.get(i) +"\n";
         }
-        return result;
+        return result.trim();
     }
 
     public static String getAllCommands(List<String> commandList){
