@@ -1,4 +1,4 @@
-E | 0 | FinTech Presentation class | 01/11/2021 0900
+E | 0 | FinTech Presentation class | 1/11/2021 0900
 E | 1 | technical proposal | 18/10/2021 1700
 T | 1 | read investment
 D | 1 | week9 SE | 15/10/2021 2200
@@ -13,4 +13,7 @@ D | 1 | complete Week10 SE | 24/10/2021 2359
 E | 1 | live life enjoy | 24/10/2021 1700
 D | 0 | run even if it rains | 24/10/2021 1700
 E | 0 | Boxing class | 25/10/2021 0715
+T | 1 | focus
+T | 0 | prob and stats revision
+E | 0 | prob and stats tuition | 2/11/2021 1800
 T | 0 | focus

@@ -1,7 +1,10 @@
 package commands;
 
+import common.Messages;
 import data.TaskList;
 import data.exception.DukeException;
+import data.exception.StorageOperationException;
+import data.exception.TaskNotFoundException;
 import storage.Storage;
 import ui.Ui;
 
@@ -18,9 +21,18 @@ public class DoneTaskCommand extends Command{
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.markAsDoneTask(this.targetMarkAsDoneIndex);
-        storage.saveAllTask(taskList.getAllTask());
-        ui.showMarkDoneTask(taskList.getTask(targetMarkAsDoneIndex));
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, StorageOperationException {
+        try{
+            taskList.markAsDoneTask(this.targetMarkAsDoneIndex);
+            storage.saveAllTask(taskList.getAllTask());
+            ui.showMarkDoneTask(taskList.getTask(targetMarkAsDoneIndex).toString());
+
+            return Messages.MARK_TASK_DONE + Messages.getTask(taskList.getTask(targetMarkAsDoneIndex).toString());
+        }catch (TaskNotFoundException | StorageOperationException ex){
+            ui.showError(Messages.FAIL_TO_MARK_TASK);
+            ui.showError(ex.getMessage());
+            return Messages.FAIL_TO_MARK_TASK;
+        }
+
     }
 }

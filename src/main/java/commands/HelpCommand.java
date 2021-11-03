@@ -1,5 +1,6 @@
 package commands;
 
+import common.Messages;
 import data.TaskList;
 import storage.Storage;
 import ui.Ui;
@@ -13,7 +14,7 @@ public class HelpCommand extends Command{
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n" + "Example: " + COMMAND_WORD;
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public String execute(TaskList taskList, Ui ui, Storage storage){
         List<String> commandNames = new ArrayList<>();
         commandNames.add(AddDeadlineCommand.MESSAGE_USAGE);
         commandNames.add(AddEventCommand.MESSAGE_USAGE);
@@ -25,5 +26,7 @@ public class HelpCommand extends Command{
         commandNames.add(HelpCommand.MESSAGE_USAGE);
         commandNames.add(ExitCommand.MESSAGE_USAGE);
         ui.showCommands(commandNames);
+
+        return Messages.getAllCommands(commandNames);
     }
 }

@@ -1,11 +1,14 @@
 package commands;
 
+import common.Messages;
+import data.Task;
 import data.TaskList;
 import data.exception.DukeException;
 import storage.Storage;
 import ui.Ui;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class SearchTasksByDateCommand extends Command{
     protected LocalDate dt ;
@@ -20,7 +23,10 @@ public class SearchTasksByDateCommand extends Command{
             + "Parameters: d/MM/yyyy \n"
             + "Example: " + COMMAND_WORD + " 01/11/2021";
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.showTasksOnSpecificDate(taskList.retrieveTasksByDate(dt));
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        List<Task> foundTasks = taskList.retrieveTasksByDate(dt);
+        ui.showTasksOnSpecificDate(taskList.getAllTaskListString(foundTasks));
+
+        return Messages.getAllTask(taskList.getAllTaskListString(foundTasks));
     }
 }

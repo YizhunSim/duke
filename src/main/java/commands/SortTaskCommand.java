@@ -1,5 +1,6 @@
 package commands;
 
+import common.Messages;
 import data.Deadline;
 import data.Event;
 import data.Task;
@@ -24,12 +25,15 @@ public class SortTaskCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public String execute(TaskList taskList, Ui ui, Storage storage){
         List<Task> tl = getTaskListByType(taskList, taskType);
         ui.showMessage("Before Sort:");
-        ui.printAllTasks(tl);
+        ui.printAllTasks(taskList.getAllTaskListString(tl));
         ui.showMessage("After Sort:");
-        ui.printAllTasks((sortListChronologically(tl, taskType)));
+        List<Task> afterSorted = sortListChronologically(tl, taskType);
+        ui.printAllTasks(taskList.getAllTaskListString(afterSorted));
+
+        return Messages.getAllTask(taskList.getAllTaskListString(afterSorted));
     }
 
     private List<Task> getTaskListByType (TaskList taskList, String taskType){

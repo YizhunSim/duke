@@ -1,5 +1,6 @@
 package commands;
 
+import common.Messages;
 import data.TaskList;
 import data.exception.DukeException;
 import storage.Storage;
@@ -18,11 +19,19 @@ public class DeleteTaskCommand extends Command{
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        // Get task description before deletion!
-        String taskToBeDeleted = taskList.deleteTask(targetDeleteIndex);
-        storage.saveAllTask(taskList.getAllTask());
-        ui.showDeletedTask(taskToBeDeleted);
-        ui.printTaskCount(taskList.getTotalListCount());
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        try{
+            String taskToBeDeleted = taskList.deleteTask(targetDeleteIndex);
+            storage.saveAllTask(taskList.getAllTask());
+            ui.showDeletedTask(taskToBeDeleted);
+            ui.printTaskCount(taskList.getTotalListCount());
+
+            return Messages.getTask(taskToBeDeleted) + Messages.getTaskCount(taskList.getTotalListCount());
+        } catch(DukeException ex){
+            ui.showError(Messages.FAIL_TO_DELETE_TASK);
+            ui.showError(ex.getMessage());
+            return Messages.FAIL_TO_DELETE_TASK;
+        }
+
     }
 }

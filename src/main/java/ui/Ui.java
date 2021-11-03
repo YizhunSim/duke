@@ -11,8 +11,11 @@ import data.Task;
  * Text UI of the application.
  */
 public class Ui {
-    private static final String DIVIDER = "____________________________________________________________";
-    private static final String DUKE_SPLASHSCREEN =
+    private final Scanner in;
+    private final PrintStream out;
+
+    public static final String DIVIDER = "____________________________________________________________";
+    public static final String DUKE_SPLASHSCREEN =
                     DIVIDER
                     + "\n" +
                       " ____        _        \n"
@@ -23,8 +26,6 @@ public class Ui {
                     + "Hello! I'm Duke\n"
                     + "What can I do for you?\n"
                     + DIVIDER;
-    private final Scanner in;
-    private final PrintStream out;
     public static final String MESSAGE_INIT_FAILED = "Failed to initialise duke application. Exiting...";
     public static final String INVALID_INPUT_USER = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
@@ -83,7 +84,7 @@ public class Ui {
      * Shows all the Task in the TaskList
      *
      */
-    public void printAllTasks(List<Task> taskList){
+    public void printAllTasks(List<String> taskList){
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(i + 1 + ". " + taskList.get(i));
         }
@@ -101,12 +102,13 @@ public class Ui {
      * Shows the Task, together with the taskList total count once it is added
      *
      */
-    public void printAddSingleTask(Task task, int taskListCount){
+    public void printAddSingleTask(String task, int taskListCount){
         showLine();
         out.println(" Got it. I've added this task:");
         out.println("   " + task);
         printTaskCount(taskListCount);
     }
+
 
     /**
      * Shows goodbye message
@@ -131,10 +133,10 @@ public class Ui {
      *
      * @param task Task that will be mark done
      */
-    public void showMarkDoneTask(Task task){
+    public void showMarkDoneTask(String task){
         showLine();
         out.println(" Nice! I've marked this task as done:");
-        out.println(task.toString());
+        out.println(task);
     }
 
     /**
@@ -142,10 +144,10 @@ public class Ui {
      *
      * @param TasksOfSameDates TaskList With similar date
      */
-    public void showTasksOnSpecificDate(List<Task> TasksOfSameDates){
+    public void showTasksOnSpecificDate(List<String> TasksOfSameDates){
         showLine();
-        for(Task t: TasksOfSameDates){
-            out.println(t.toString());
+        for(String t: TasksOfSameDates){
+            out.println(t);
         }
     }
 

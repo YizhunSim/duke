@@ -1,5 +1,6 @@
 package commands;
 
+import common.Messages;
 import data.TaskList;
 import storage.Storage;
 import ui.Ui;
@@ -13,7 +14,8 @@ public class ListCommand extends Command{
 
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage){
-        ui.printAllTasks(taskList.getAllTask());
+    public String execute(TaskList taskList, Ui ui, Storage storage){
+        ui.printAllTasks(taskList.getAllTaskListString(taskList.getAllTask()));
+        return Messages.getAllTask(taskList.getAllTaskListString(taskList.getAllTask()));
     }
 }

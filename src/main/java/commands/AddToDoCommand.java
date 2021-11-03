@@ -1,5 +1,6 @@
 package commands;
 
+import common.Messages;
 import data.Task;
 import data.TaskList;
 import data.exception.StorageOperationException;
@@ -20,9 +21,18 @@ public class AddToDoCommand extends Command {
             + "Example: " + COMMAND_WORD + " TIC2002 Project";
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws StorageOperationException {
-        taskList.addTask(task);
-        storage.saveTask(taskList.getLatestAddedTask());
-        ui.printAddSingleTask(task, taskList.getTotalListCount());
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws StorageOperationException {
+        try{
+            taskList.addTask(task);
+            storage.saveTask(taskList.getLatestAddedTask());
+            ui.printAddSingleTask(task.toString(), taskList.getTotalListCount());
+
+            return Messages.ADDED_TASK + Messages.getTask(task.toString()) + Messages.getTaskCount(taskList.getTotalListCount());
+        }catch(StorageOperationException ex){
+            ui.showError(Messages.FAIL_TO_ADD_TASK);
+            ui.showError(ex.getMessage());
+            return Messages.FAIL_TO_ADD_TASK;
+        }
+
     }
 }
