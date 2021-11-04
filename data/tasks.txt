@@ -13,7 +13,10 @@ D | 1 | complete Week10 SE | 24/10/2021 2359
 E | 1 | live life enjoy | 24/10/2021 1700
 D | 0 | run even if it rains | 24/10/2021 1700
 E | 0 | Boxing class | 25/10/2021 0715
-T | 1 | focus
 T | 0 | prob and stats revision
 E | 0 | prob and stats tuition | 2/11/2021 1800
-T | 0 | focus
+T | 1 | focus
+T | 1 | move with week12
+E | 0 | do prob and stats tutorial 3,4,5 | 4/11/2021 1800
+D | 0 | Start on SE Report | 7/11/2021 0900
+T | 0 | Journal

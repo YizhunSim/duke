@@ -18,6 +18,5 @@ public class ExitCommand extends Command{
         setExit(true);
 
         return Messages.GOODBYE_MESSAGE;
-
     }
 }

@@ -5,8 +5,6 @@ import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
 
-import data.Task;
-
 /**
  * Text UI of the application.
  */
@@ -16,9 +14,9 @@ public class Ui {
 
     public static final String DIVIDER = "____________________________________________________________";
     public static final String DUKE_SPLASHSCREEN =
-                    DIVIDER
+            DIVIDER
                     + "\n" +
-                      " ____        _        \n"
+                    " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
@@ -40,17 +38,15 @@ public class Ui {
 
     /**
      * Generates and prints the welcome duke message upon the start of the application.
-     *
      */
-    public void showWelcome(){
+    public void showWelcome() {
         out.println(DUKE_SPLASHSCREEN);
     }
 
     /**
      * Shows error message upon failure to load Duke Application
-     *
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         out.println(MESSAGE_INIT_FAILED);
     }
 
@@ -59,32 +55,31 @@ public class Ui {
      *
      * @param errorMessage Error Message to be shown to the user
      */
-    public void showError(String errorMessage){
+    public void showError(String errorMessage) {
         out.println(errorMessage);
     }
 
-    public void showInvalidInput(){
+    public String showInvalidInput() {
         out.println(INVALID_INPUT_USER);
+        return INVALID_INPUT_USER;
     }
 
     /**
      * Shows Divider Line
-     *
      */
-    public void showLine(){
+    public void showLine() {
         out.println(DIVIDER);
     }
 
-    public String readCommand(){
+    public String readCommand() {
         out.print("Enter command: ");
         return in.nextLine();
     }
 
     /**
      * Shows all the Task in the TaskList
-     *
      */
-    public void printAllTasks(List<String> taskList){
+    public void printAllTasks(List<String> taskList) {
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(i + 1 + ". " + taskList.get(i));
         }
@@ -92,17 +87,15 @@ public class Ui {
 
     /**
      * Shows all the Total Task Count in the TaskList
-     *
      */
-    public void printTaskCount(int taskCount){
+    public void printTaskCount(int taskCount) {
         System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
     /**
      * Shows the Task, together with the taskList total count once it is added
-     *
      */
-    public void printAddSingleTask(String task, int taskListCount){
+    public void printAddSingleTask(String task, int taskListCount) {
         showLine();
         out.println(" Got it. I've added this task:");
         out.println("   " + task);
@@ -112,9 +105,8 @@ public class Ui {
 
     /**
      * Shows goodbye message
-     *
      */
-    public void showGoodByeMessage(){
+    public void showGoodByeMessage() {
         out.println("____________________________________________________________\n"
                 + " Bye. Hope to see you again soon!\n");
     }
@@ -124,7 +116,7 @@ public class Ui {
      *
      * @param deletedTask Task that will be deleted
      */
-    public void showDeletedTask(String deletedTask){
+    public void showDeletedTask(String deletedTask) {
         out.println(deletedTask);
     }
 
@@ -133,7 +125,7 @@ public class Ui {
      *
      * @param task Task that will be mark done
      */
-    public void showMarkDoneTask(String task){
+    public void showMarkDoneTask(String task) {
         showLine();
         out.println(" Nice! I've marked this task as done:");
         out.println(task);
@@ -144,18 +136,17 @@ public class Ui {
      *
      * @param TasksOfSameDates TaskList With similar date
      */
-    public void showTasksOnSpecificDate(List<String> TasksOfSameDates){
+    public void showTasksOnSpecificDate(List<String> TasksOfSameDates) {
         showLine();
-        for(String t: TasksOfSameDates){
+        for (String t : TasksOfSameDates) {
             out.println(t);
         }
     }
 
     /**
      * Shows all available help commands with its message_usage
-     *
      */
-    public void showCommands(List<String> commandList){
+    public void showCommands(List<String> commandList) {
         for (int i = 0; i < commandList.size(); i++) {
             System.out.println(i + 1 + ". " + commandList.get(i));
         }
@@ -166,7 +157,7 @@ public class Ui {
      *
      * @param message to be shown to user
      */
-    public void showMessage(String message){
+    public void showMessage(String message) {
         out.println(message);
     }
 

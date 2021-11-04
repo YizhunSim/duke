@@ -30,7 +30,7 @@ public class FindTaskByKeywordCommand extends Command{
             Set<String> wordsInTask = new HashSet<>(getWordsInTask(task));
             /*  Disjoint used to check whether two specified collections are disjoint.
                 It returns true if the two specified collections have no elements in common.
-                *It returns false if the two specified collections have elements in common   */
+                It returns false if the two specified collections **have elements in common**   */
             if(!Collections.disjoint(wordsInTask, keywords)){
                 tl.add(task);
             }

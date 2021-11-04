@@ -23,9 +23,6 @@ public class Parser {
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    public static final Pattern ADD_TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("\\b(todo)\\b (?<todoDetails>.*)|\\b(deadline|event)\\b (?<deadlineEventDetails>.*) (\\/(?<deadlineEventDate>.*))"); // variable number of tags
-
     /**
      * Used for initial separation of deadline description and deadline date.
      */
@@ -108,7 +105,9 @@ public class Parser {
      *
      * @return the prepared command
      */
-    private static Command doHelpCommand() { return new HelpCommand();}
+    private static Command doHelpCommand(){
+        return new HelpCommand();
+    }
 
     /**
      * Parses arguments in the context of the sort task [sort] command.
@@ -143,7 +142,7 @@ public class Parser {
         try{
             return new AddToDoCommand(new Todo(args));
         }catch(Exception e){
-            return new IncorrectCommand("Task cannot be added. No description details");
+            return new IncorrectCommand("Task - Todo cannot be added. No description details");
         }
     }
 
@@ -167,7 +166,7 @@ public class Parser {
             return new AddDeadlineCommand(task);
 
         }catch(Exception e){
-            return new IncorrectCommand("Task cannot be added. No description details");
+            return new IncorrectCommand("Task - Deadline cannot be added. No description details");
         }
     }
 
@@ -191,7 +190,7 @@ public class Parser {
             return new AddEventCommand(task);
 
         }catch(Exception e){
-            return new IncorrectCommand("Task cannot be added. No description details");
+            return new IncorrectCommand("Task - Event cannot be added. No description details");
         }
     }
 
@@ -202,11 +201,12 @@ public class Parser {
      * @return the prepared command
      */
     private static Command doDoneTaskCommand(String args){
+        int targetIndex = -1;
         try{
-            int targetIndex = Integer.parseInt((args));
+            targetIndex = Integer.parseInt((args));
             return new DoneTaskCommand(targetIndex - 1);
         } catch (Exception e){
-            return new IncorrectCommand("Task cannot be mark as done!");
+            return new IncorrectCommand("Task: " + targetIndex + " cannot be mark as done!");
         }
     }
 
@@ -217,11 +217,12 @@ public class Parser {
      * @return the prepared command
      */
     private static Command doDeleteTaskCommand(String args){
+        int targetIndex = -1;
         try{
-            int targetIndex = Integer.parseInt((args));
+            targetIndex = Integer.parseInt((args));
             return new DeleteTaskCommand(targetIndex - 1);
         } catch (Exception e){
-            return new IncorrectCommand("Task cannot be deleted");
+            return new IncorrectCommand("Task: "+ targetIndex +" cannot be deleted");
         }
     }
 
@@ -307,9 +308,4 @@ public class Parser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         return dateTime.format(formatter);
     }
-
-
-
-
-
 }

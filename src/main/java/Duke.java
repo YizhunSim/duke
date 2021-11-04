@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 import commands.Command;
 import data.exception.StorageOperationException;
 import parser.Parser;

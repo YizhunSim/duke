@@ -17,10 +17,9 @@ public class IncorrectCommand extends Command{
    @Override
     public String execute(TaskList task, Ui ui, Storage storage) throws DukeException {
        try{
-           return Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+           return errorMessage + "\n" + Messages.INVALID_INPUT_USER;
        }finally {
-           throw new DukeException(errorMessage);
+           return errorMessage + "\n" + ui.showInvalidInput();
        }
-
    }
 }

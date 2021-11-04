@@ -1,7 +1,6 @@
 package storage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.nio.file.Paths;
@@ -10,7 +9,6 @@ import java.nio.file.Files;
 import java.util.List;
 
 import data.Task;
-import data.TaskList;
 import data.exception.DukeException;
 import data.exception.StorageOperationException;
 
@@ -18,7 +16,7 @@ import data.exception.StorageOperationException;
  * Represents the file used to store Duke's Chat Bot Task List data.
  */
 public class Storage {
-    public final String home = System.getProperty(("user.home"));
+    private final String home = System.getProperty(("user.home"));
     private String filePath;
     private String dataAbsoluteFilePath;
     private File f;

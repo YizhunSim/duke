@@ -35,6 +35,5 @@ public class AddEventCommand extends Command {
             ui.showError(ex.getMessage());
             return Messages.FAIL_TO_ADD_TASK;
         }
-
     }
 }
