@@ -12,14 +12,11 @@ public class Messages {
                     + "\t| | | | | | | |/ / _ \\\n"
                     + "\t| |_| | |_| |   <  __/\n"
                     + "\t|____/ \\__,_|_|\\_\\___|\n\n"
-                    + "\tHello! I'm Duke\n"
+                    + "\tGreetings... I'm Duke\n"
                     + "\tWhat can I do for you?\n"
                     + DIVIDER;
 
-
-    public static final String MESSAGE_INIT_FAILED = "Failed to initialise duke application. Exiting...";
-
-    public static final String INVALID_INPUT_USER = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static final String INVALID_INPUT_USER = "Speak properly child! For I fail to comprehend what that means.";
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!";
 
@@ -31,9 +28,21 @@ public class Messages {
 
     public static final String ADDED_TASK = "Got it. I've added this task:";
 
+    public static final String DELETED_TASK = "Got it. I've removed this task:";
+
     public static final String MARK_TASK_DONE = "Nice! I've marked this task as done:";
 
+    public static final String TASK_DONE_EXIST = "Task is already marked as completed!";
+
+    public static final String UNMARK_TASK_DONE = "Dohhh! I am not done with this task:";
+
+    public static final String TASK_UNDONE_EXIST = "Task is already marked as incomplete!";
+
+    public static final String UNSPECIFIED_TASK_TO_MARK_DONE_UNDONE = "Unspecified Task! Please include in the task index you wish to mark as done/undone";
+
     public static final String FAIL_TO_MARK_TASK = "Unable to mark task as done. Please check if task exist";
+
+    public static final String FAIL_TO_UMMARK_TASK = "Unable to mark task as undone. Please check if task exist";
 
     public static final String FAIL_TO_FIND_TASK_BY_KEYWORD = "Unable to find task by keyword.";
 

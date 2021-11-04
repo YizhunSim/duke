@@ -1,5 +1,7 @@
 package ui;
 
+import common.Messages;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
@@ -21,7 +23,7 @@ public class Ui {
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n\n"
-                    + "Hello! I'm Duke\n"
+                    + "Greetings... I'm Duke\n"
                     + "What can I do for you?\n"
                     + DIVIDER;
     public static final String MESSAGE_INIT_FAILED = "Failed to initialise duke application. Exiting...";
@@ -59,9 +61,14 @@ public class Ui {
         out.println(errorMessage);
     }
 
-    public String showInvalidInput() {
-        out.println(INVALID_INPUT_USER);
-        return INVALID_INPUT_USER;
+    public String showInvalidInput(String input) {
+        out.println(Messages.INVALID_INPUT_USER + " \n" + input);
+        return Messages.INVALID_INPUT_USER + " \n" + input;
+    }
+
+    public String showIncorrectInput(String input) {
+        out.println(Messages.MESSAGE_INVALID_COMMAND_FORMAT + " \n" + input);
+        return Messages.MESSAGE_INVALID_COMMAND_FORMAT + " \n" + input;
     }
 
     /**
@@ -127,7 +134,18 @@ public class Ui {
      */
     public void showMarkDoneTask(String task) {
         showLine();
-        out.println(" Nice! I've marked this task as done:");
+        out.println(" " + Messages.MARK_TASK_DONE);
+        out.println(task);
+    }
+
+    /**
+     * Shows Tasks once it is mark undone
+     *
+     * @param task Task that will be mark undone
+     */
+    public void showUndoneTask(String task) {
+        showLine();
+        out.println(" " + Messages.UNMARK_TASK_DONE);
         out.println(task);
     }
 

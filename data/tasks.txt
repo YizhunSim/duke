@@ -20,3 +20,10 @@ T | 1 | move with week12
 E | 0 | do prob and stats tutorial 3,4,5 | 4/11/2021 1800
 D | 0 | Start on SE Report | 7/11/2021 0900
 T | 0 | Journal
+D | 0 | Prepare Final Submission For TIC2002 SE Report (Soft Deadline) | 8/11/2021 2359
+E | 0 | TIC2002 Final Exam | 2/12/2021 1300
+T | 0 | DO SE Report - Prepare for submission
+D | 0 | TIC2002 Quiz: Week 12 Quiz | 16/11/2021 1900
+T | 0 | create todo task
+E | 0 | create event task | 4/11/2021 1800
+D | 0 | create deadline task | 4/11/2021 2000

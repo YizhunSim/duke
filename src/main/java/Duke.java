@@ -10,6 +10,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
+    private boolean isExit = false;
 
     public Duke(String filePath){
         ui = new Ui();
@@ -20,14 +21,14 @@ public class Duke {
             ui.showLoadingError();
             taskList = new TaskList();
             ui.showError(e.getMessage());
+            isExit = true;
         }
     }
 
     public void run(){
-        ui.showWelcome();
-        boolean isExit = false;
         while (!isExit) {
             try {
+                ui.showWelcome();
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("______")
                 Command c = new Parser().parseCommand(fullCommand);

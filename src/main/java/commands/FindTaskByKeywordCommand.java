@@ -11,6 +11,11 @@ import java.util.*;
 
 public class FindTaskByKeywordCommand extends Command{
     protected Set<String> keywords;
+    public static final String COMMAND_WORD = CommandEnum.FIND.toString().toLowerCase();
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all deadline/events task based on a specific keyword. \n"
+            + "Parameters: [KEYWORD] \n"
+            + "Example: " + COMMAND_WORD + " proposal";
 
     public FindTaskByKeywordCommand(Set<String> keywords){
         this.keywords = keywords;

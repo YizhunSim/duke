@@ -26,7 +26,7 @@ public class DeleteTaskCommand extends Command{
             ui.showDeletedTask(taskToBeDeleted);
             ui.printTaskCount(taskList.getTotalListCount());
 
-            return Messages.getTask(taskToBeDeleted) + Messages.getTaskCount(taskList.getTotalListCount());
+            return Messages.DELETED_TASK + " " + Messages.getTask(taskToBeDeleted) + "\n"+ Messages.getTaskCount(taskList.getTotalListCount());
         } catch(DukeException ex){
             ui.showError(Messages.FAIL_TO_DELETE_TASK);
             ui.showError(ex.getMessage());

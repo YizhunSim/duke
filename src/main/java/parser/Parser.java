@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import commands.*;
+import common.Messages;
 import data.Deadline;
 import data.Event;
 import data.Task;
@@ -50,7 +51,7 @@ public class Parser {
     public Command parseCommand(String userInput){
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+            return new InvalidCommand(userInput);
         }
 
         CommandEnum commandEnum = null;
@@ -61,7 +62,7 @@ public class Parser {
         try{
             commandEnum = CommandEnum.valueOf(commandWord);
         } catch (IllegalArgumentException e){
-            return new IncorrectCommand(("Incorrect Command: "+commandWord));
+            return new InvalidCommand(("Invalid Command: "+ userInput));
         }
         switch (commandEnum) {
         case LIST:
@@ -76,6 +77,8 @@ public class Parser {
             return doDeleteTaskCommand(arguments);
         case DONE:
             return doDoneTaskCommand(arguments);
+        case UNDO:
+            return doUndoTaskCommand(arguments);
         case SEARCH:
             return doSearchTaskBySpecificDate(arguments);
         case FIND:
@@ -87,7 +90,7 @@ public class Parser {
         case BYE:
             return new ExitCommand();
         default:
-            return new IncorrectCommand("Unable to execute command");
+            return new InvalidCommand("Unable to execute command");
 
         }
     }
@@ -140,9 +143,12 @@ public class Parser {
      */
     private static Command doAddToDoCommand(String args){
         try{
+            if (args.isEmpty()){
+                return new IncorrectCommand(AddToDoCommand.MESSAGE_USAGE);
+            }
             return new AddToDoCommand(new Todo(args));
         }catch(Exception e){
-            return new IncorrectCommand("Task - Todo cannot be added. No description details");
+            return new IncorrectCommand(AddToDoCommand.MESSAGE_USAGE);
         }
     }
 
@@ -156,7 +162,7 @@ public class Parser {
         try{
             final Matcher matcher = ADD_DEADLINE_DATA_ARGS_FORMAT.matcher(args.trim());
             if (!matcher.matches()) {
-                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+                return new IncorrectCommand(AddDeadlineCommand.MESSAGE_USAGE);
             }
 
             String deadlineDescription = matcher.group("deadlineDescription").trim();
@@ -180,7 +186,7 @@ public class Parser {
         try{
             final Matcher matcher = ADD_EVENT_DATA_ARGS_FORMAT.matcher(args.trim());
             if (!matcher.matches()) {
-                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+                return new IncorrectCommand(AddEventCommand.MESSAGE_USAGE);
             }
 
             String eventDescription = matcher.group("eventDescription").trim();
@@ -203,10 +209,32 @@ public class Parser {
     private static Command doDoneTaskCommand(String args){
         int targetIndex = -1;
         try{
+            if (args.isEmpty()){
+                return new IncorrectCommand(Messages.UNSPECIFIED_TASK_TO_MARK_DONE_UNDONE);
+            }
             targetIndex = Integer.parseInt((args));
-            return new DoneTaskCommand(targetIndex - 1);
+            return new DoneTaskCommand(targetIndex);
         } catch (Exception e){
             return new IncorrectCommand("Task: " + targetIndex + " cannot be mark as done!");
+        }
+    }
+
+    /**
+     * Parses arguments in the context of undoing a task which was marked done [undo] command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private static Command doUndoTaskCommand(String args){
+        int targetIndex = -1;
+        try{
+            if (args.isEmpty()){
+                return new IncorrectCommand((Messages.UNSPECIFIED_TASK_TO_MARK_DONE_UNDONE));
+            }
+            targetIndex = Integer.parseInt((args));
+            return new UndoTaskCommand(targetIndex);
+        } catch (Exception e){
+            return new IncorrectCommand("Task: " + targetIndex + " cannot be mark undone!");
         }
     }
 
@@ -237,7 +265,7 @@ public class Parser {
             LocalDate dt = parseStringFindDateFromText(args);
             return new SearchTasksByDateCommand(dt);
         } catch (Exception e){
-            return new IncorrectCommand("Search Task by specific date encountered exception");
+            return new IncorrectCommand(SearchTasksByDateCommand.MESSAGE_USAGE);
         }
     }
 
@@ -249,11 +277,14 @@ public class Parser {
      */
     private static Command doFindTaskByKeyword(String args){
         try{
+            if (args.isEmpty()){
+                return new IncorrectCommand(FindTaskByKeywordCommand.MESSAGE_USAGE);
+            }
             String[] keywords = args.split(" ");
             Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
             return new FindTaskByKeywordCommand(keywordSet);
         } catch (Exception e){
-            return new IncorrectCommand("Find Task by keyword encountered exception");
+            return new IncorrectCommand(FindTaskByKeywordCommand.MESSAGE_USAGE);
         }
     }
 

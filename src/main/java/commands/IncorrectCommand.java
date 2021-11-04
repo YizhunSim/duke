@@ -19,7 +19,7 @@ public class IncorrectCommand extends Command{
        try{
            return errorMessage + "\n" + Messages.INVALID_INPUT_USER;
        }finally {
-           return errorMessage + "\n" + ui.showInvalidInput();
+           return ui.showIncorrectInput(errorMessage);
        }
    }
 }

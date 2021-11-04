@@ -1,5 +1,6 @@
 package data;
 
+import data.exception.DukeException;
 import data.exception.TaskNotFoundException;
 import org.junit.jupiter.api.Test;
 
@@ -131,7 +132,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void markAsDoneTask_validTaskId_success() throws TaskNotFoundException {
+    public void markAsDoneTask_validTaskId_success() throws TaskNotFoundException, DukeException {
         int taskId = 1;
         Task t1 = new Deadline("deadline description", LocalDateTime.of(2021,10,10,10,10));
         Task t2 = new Event("event description", LocalDateTime.of(2021,10,10,10,10));
@@ -146,7 +147,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void markAsDoneTask_invalidTaskId_taskNotFoundExceptionThrown() throws TaskNotFoundException{
+    public void markAsDoneTask_invalidTaskId_taskNotFoundExceptionThrown() throws TaskNotFoundException, DukeException{
         int taskId = 4;
         Task t1 = new Deadline("deadline description", LocalDateTime.of(2021,10,10,10,10));
         Task t2 = new Event("event description", LocalDateTime.of(2021,10,10,10,10));

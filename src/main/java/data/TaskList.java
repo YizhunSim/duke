@@ -1,5 +1,7 @@
 package data;
 
+import common.Messages;
+import data.exception.DukeException;
 import data.exception.TaskNotFoundException;
 
 import java.time.LocalDate;
@@ -77,16 +79,36 @@ public class TaskList {
     }
 
     /**
-     * Marks a particular task as done (Might have duplicate)
+     * Marks a particular task as done
      */
-    public void markAsDoneTask(int taskToMarkDoneIndex) throws TaskNotFoundException{
+    public void markAsDoneTask(int taskToMarkDoneIndex) throws TaskNotFoundException, DukeException {
+        taskToMarkDoneIndex = taskToMarkDoneIndex - 1; //Decrement as comparing by List index
         boolean hasExceededTaskListSizeLimit = taskToMarkDoneIndex > allTasks.size();
         boolean isOutOfBoundTaskListStartIndex = taskToMarkDoneIndex < 0;
 
         if (hasExceededTaskListSizeLimit || isOutOfBoundTaskListStartIndex){
-            throw new TaskNotFoundException(taskToMarkDoneIndex);
-        }else{
+            throw new TaskNotFoundException(taskToMarkDoneIndex + 1); //Increment back to show how what number user originally input
+        }else if (getTask(taskToMarkDoneIndex).getIsDone()){
+            throw new DukeException(Messages.TASK_DONE_EXIST);
+        }else {
             getTask(taskToMarkDoneIndex).markAsDone();
+        }
+    }
+
+    /**
+     * Undo a particular task as done
+     */
+    public void markAsUndoTask(int taskToMarkUndoneIndex) throws TaskNotFoundException, DukeException{
+        taskToMarkUndoneIndex = taskToMarkUndoneIndex - 1; //Decrement as comparing by List index
+        boolean hasExceededTaskListSizeLimit = taskToMarkUndoneIndex > allTasks.size();
+        boolean isOutOfBoundTaskListStartIndex = taskToMarkUndoneIndex < 0;
+
+        if (hasExceededTaskListSizeLimit || isOutOfBoundTaskListStartIndex){
+            throw new TaskNotFoundException(taskToMarkUndoneIndex + 1); //Increment back to show how what number user originally input
+        }else if (!getTask(taskToMarkUndoneIndex).getIsDone()){
+            throw new DukeException(Messages.TASK_UNDONE_EXIST);
+        }else {
+            getTask(taskToMarkUndoneIndex).markAsUndone();
         }
     }
 

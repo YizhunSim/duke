@@ -30,6 +30,13 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Method to mark task as Undone for a single Task object
+     */
+    public void markAsUndone(){
+        this.isDone = false;
+    }
+
     public String getTaskDescription(){
         return this.description;
     }

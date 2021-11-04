@@ -16,9 +16,9 @@ public class AddDeadlineCommand extends Command{
 
     public static final String COMMAND_WORD = CommandEnum.DEADLINE.toString().toLowerCase();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deadline task to the TaskList. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Deadline task to the TaskList. "
             + "DEADLINE_DATE to be specified in the following date format -> [d/MM/yyyy HHmm]\n"
-            + "Parameters: DEADLINE_DESCRIPTION /by DEADLINE_DATE\n"
+            + "Parameters: [DEADLINE_DESCRIPTION] /by [DEADLINE_DATE]\n"
             + "Example: "
             + COMMAND_WORD + " TIC2002 Project /by 01/11/2021 2359";
     @Override
