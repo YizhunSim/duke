@@ -87,8 +87,9 @@ public class Ui {
      * Shows all the Task in the TaskList
      */
     public void printAllTasks(List<String> taskList) {
+        out.println("You have "+ taskList.size() + " tasks in the list.");
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(i + 1 + ". " + taskList.get(i));
+            out.println(i + 1 + ". " + taskList.get(i));
         }
     }
 
@@ -96,7 +97,7 @@ public class Ui {
      * Shows all the Total Task Count in the TaskList
      */
     public void printTaskCount(int taskCount) {
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
+        out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
     /**

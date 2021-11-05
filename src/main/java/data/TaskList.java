@@ -47,6 +47,20 @@ public class TaskList {
     }
 
     /**
+     * Checks whether a Task already exists in the Task List.
+     *
+     * @param newTask external changes to this will not affect this Task List
+     */
+    public boolean isTaskExist(Task newTask){
+        if (allTasks.contains(newTask)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    /**
      * Returns the total count of the entire TaskList
      */
     public int getTotalListCount(){

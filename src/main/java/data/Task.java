@@ -49,6 +49,20 @@ public abstract class Task {
     }
 
     @Override
+    public boolean equals (Object object) {
+        boolean result = false;
+        if (object == null || object.getClass() != getClass()) {
+            result = false;
+        } else {
+            Task task = (Task) object;
+            if (this.description.equals(task.getTaskDescription())) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
     public String toString() {
         return  "["+ getStatusIcon() + "] " + getTaskDescription();
     }

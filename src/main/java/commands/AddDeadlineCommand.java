@@ -24,11 +24,14 @@ public class AddDeadlineCommand extends Command{
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws StorageOperationException {
         try {
+            if (taskList.isTaskExist(task)){
+                throw new StorageOperationException(Messages.TASK_EXIST);
+            }
             taskList.addTask(task);
             storage.saveTask(taskList.getLatestAddedTask());
             ui.printAddSingleTask(task.toString(), taskList.getTotalListCount()); // Message will still be printed in console
 
-            return Messages.ADDED_TASK + Messages.getTask(task.toString()) + Messages.getTaskCount(taskList.getTotalListCount());
+            return Messages.ADDED_TASK + Messages.getTask(task.toString()) + ".\n" + Messages.getTaskCount(taskList.getTotalListCount());
         } catch (StorageOperationException ex) {
             ui.showError(Messages.FAIL_TO_ADD_TASK);
             ui.showError(ex.getMessage());
