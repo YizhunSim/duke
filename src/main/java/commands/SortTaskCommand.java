@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 public class SortTaskCommand extends Command{
     public static final String EVENT = CommandEnum.EVENT.toString().toLowerCase();
     public static final String DEADLINE = CommandEnum.DEADLINE.toString().toLowerCase();
+    private static final String CHRONOLOGICAL = "chronological";
+    private static final String DONE = "done";
     private String taskType;
     private String sortType;
 
@@ -26,14 +28,27 @@ public class SortTaskCommand extends Command{
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage){
-        List<Task> tl = getTaskListByType(taskList, taskType);
+        String result = "";
+        List<Task> beforeSortedTaskList = getTaskListByType(taskList, taskType);
         ui.showMessage("Before Sort:");
-        ui.printAllTasks(taskList.getAllTaskListString(tl));
-        ui.showMessage("After Sort:");
-        List<Task> afterSorted = sortListChronologically(tl, taskType);
-        ui.printAllTasks(taskList.getAllTaskListString(afterSorted));
+        ui.printAllTasks(taskList.getAllTaskListString(beforeSortedTaskList));
+        if (this.sortType.equals(CHRONOLOGICAL)){
+            ui.showMessage("After Sort:");
+            List<Task> afterSortedTaskList = sortListChronologically(beforeSortedTaskList, taskType);
+            ui.printAllTasks(taskList.getAllTaskListString(afterSortedTaskList));
 
-        return Messages.getAllTask(taskList.getAllTaskListString(afterSorted));
+            result = "Before Sort:\n" + Messages.getAllTask(taskList.getAllTaskListString(beforeSortedTaskList)) +
+                    "\nAfter Sort:\n " + Messages.getAllTask(taskList.getAllTaskListString(afterSortedTaskList));
+        }
+        if (this.sortType.equals(DONE)){
+            ui.showMessage("After Sort:");
+            List<Task> afterSortedTaskList = sortListByCompletion(beforeSortedTaskList, taskType);
+            ui.printAllTasks(taskList.getAllTaskListString(afterSortedTaskList));
+
+            result = "Before Sort:\n" + Messages.getAllTask(taskList.getAllTaskListString(beforeSortedTaskList)) +
+                    "\nAfter Sort:\n " + Messages.getAllTask(taskList.getAllTaskListString(afterSortedTaskList));
+        }
+        return result;
     }
 
     private List<Task> getTaskListByType (TaskList taskList, String taskType){
@@ -57,6 +72,21 @@ public class SortTaskCommand extends Command{
         if (taskType.equals(EVENT)){
             sortedList = listTask.stream()
                     .sorted(Comparator.comparing(t -> ((Event) t).getAt()))
+                    .collect(Collectors.toList());
+        }
+        return sortedList;
+    }
+
+    private List<Task> sortListByCompletion (List<Task> listTask, String taskType){
+        List<Task> sortedList = new ArrayList<>();
+        if (taskType.equals(DEADLINE)){
+            sortedList = listTask.stream()
+                    .sorted(Comparator.comparing(t -> ((Deadline) t).getIsDone()))
+                    .collect(Collectors.toList());
+        }
+        if (taskType.equals(EVENT)){
+            sortedList = listTask.stream()
+                    .sorted(Comparator.comparing(t -> ((Event) t).getIsDone()))
                     .collect(Collectors.toList());
         }
         return sortedList;

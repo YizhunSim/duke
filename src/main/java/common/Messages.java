@@ -16,13 +16,13 @@ public class Messages {
                     + "\tWhat can I do for you?\n"
                     + DIVIDER;
 
-    public static final String INVALID_INPUT_USER = "Speak properly child! For I fail to comprehend what that means.";
+    public static final String INVALID_INPUT_USER = "Speak in Duke minion! For I am unable to comprehend what that means.";
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!";
 
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
 
-    public static final String FAIL_TO_ADD_TASK = "Unable to add task. Please check for conflicts!";
+    public static final String FAIL_TO_ADD_TASK = "Unable to add task. Please check for duplicate/conflicts!";
 
     public static final String FAIL_TO_DELETE_TASK = "Unable to delete task. Please check if task exist";
 
@@ -44,6 +44,8 @@ public class Messages {
 
     public static final String FAIL_TO_UMMARK_TASK = "Unable to mark task as undone. Please check if task exist";
 
+    public static final String TASK_EXIST = "The same task already exist. [Duplicates]";
+
     public static final String FAIL_TO_FIND_TASK_BY_KEYWORD = "Unable to find task by keyword.";
 
     public static String getTask(String task){
@@ -55,11 +57,12 @@ public class Messages {
     }
 
     public static String getAllTask(List<String> taskList){
+        String resultTaskCount = "You have " + taskList.size() + " tasks in the list.\n";
         String result = "";
         for (int i = 0; i < taskList.size(); i++) {
             result += i + 1 + ". " + taskList.get(i) +"\n";
         }
-        return result.trim();
+        return resultTaskCount + result.trim();
     }
 
     public static String getAllCommands(List<String> commandList){

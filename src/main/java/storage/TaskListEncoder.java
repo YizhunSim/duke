@@ -58,6 +58,7 @@ public class TaskListEncoder {
      * @return the encoded task in String to be store back into the text file
      */
     private static String encodeTaskToString(Task task){
+        assert task != null : "[encodeTaskToString]: Task should not be null";
         StringBuilder encodedTaskBuilder = new StringBuilder();
         if (task instanceof Todo){
             encodedTaskBuilder.append(TaskListEnum.T);
@@ -87,6 +88,7 @@ public class TaskListEncoder {
      * @return Partial Construction of the task in the specified txt file
      */
     private static StringBuilder appendEncodedTask(StringBuilder sb, Task task){
+        assert task != null : "[appendEncodedTask] Task should not be null";
         sb.append(" | ");
         sb.append(task.getIsDone() ? "1" : 0);
         sb.append(" | ");

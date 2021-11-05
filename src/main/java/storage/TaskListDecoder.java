@@ -43,6 +43,8 @@ public class TaskListDecoder {
         if (!matcher.matches()) {
             throw new StorageOperationException("Encoded task in invalid format. Unable to decode");
         }
+        assert !encodedTask.isEmpty() : "[decodeTaskFromString] encodedTask string should not be null";
+
         Task newTask = null;
         String[] data = encodedTask.split("[|]");
         String typeOfTask = data[0].trim();

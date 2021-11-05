@@ -128,6 +128,8 @@ public class Parser {
             String typeOfTask = matcher.group("typeOfTask").trim();
             String methodOfSort = matcher.group("methodOfSort").trim();
 
+            assert !typeOfTask.isEmpty() && !methodOfSort.isEmpty() : "[doSortTaskCommand] typeOfTask and methodOfSort should not be empty.";
+
             return new SortTaskCommand(typeOfTask, methodOfSort);
 
         }catch(Exception e){
@@ -168,6 +170,8 @@ public class Parser {
             String deadlineDescription = matcher.group("deadlineDescription").trim();
             String deadlineDate = matcher.group("deadlineDate").trim();
 
+            assert !deadlineDescription.isEmpty() && !deadlineDate.isEmpty(): "[doAddDeadlineCommand] deadlineDescription and deadlineDate should not be empty.";
+
             Task task = new Deadline(deadlineDescription, parseStringDateTimeFromText(deadlineDate));
             return new AddDeadlineCommand(task);
 
@@ -191,6 +195,8 @@ public class Parser {
 
             String eventDescription = matcher.group("eventDescription").trim();
             String eventDate = matcher.group("eventDate").trim();
+
+            assert !eventDescription.isEmpty() && !eventDate.isEmpty() : "[doAddEventCommand] eventDescription and eventDate should not be empty.";
 
             Task task = new Event(eventDescription, parseStringDateTimeFromText(eventDate));
             return new AddEventCommand(task);
