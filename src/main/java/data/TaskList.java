@@ -79,8 +79,8 @@ public class TaskList {
         if (hasExceededTaskListSizeLimit || isOutOfBoundTaskListStartIndex){
             throw new TaskNotFoundException(toBeDeletedTaskIndex);
         }else{
-            String taskToBeDeleted = allTasks.get(toBeDeletedTaskIndex).toString();
-            allTasks.remove(toBeDeletedTaskIndex);
+            String taskToBeDeleted = getTask(toBeDeletedTaskIndex).toString();
+            allTasks.remove(toBeDeletedTaskIndex-1);
             return taskToBeDeleted;
         }
     }
@@ -88,20 +88,19 @@ public class TaskList {
     /**
      * Returns the latest task that was added to the Task List
      */
-    public Task getLatestAddedTask(){
-        return allTasks.get(getTotalListCount()-1);
+    public Task getLatestAddedTask() throws TaskNotFoundException {
+        return getTask(getTotalListCount());
     }
 
     /**
      * Marks a particular task as done
      */
     public void markAsDoneTask(int taskToMarkDoneIndex) throws TaskNotFoundException, DukeException {
-        taskToMarkDoneIndex = taskToMarkDoneIndex - 1; //Decrement as comparing by List index
         boolean hasExceededTaskListSizeLimit = taskToMarkDoneIndex > allTasks.size();
         boolean isOutOfBoundTaskListStartIndex = taskToMarkDoneIndex < 0;
 
         if (hasExceededTaskListSizeLimit || isOutOfBoundTaskListStartIndex){
-            throw new TaskNotFoundException(taskToMarkDoneIndex + 1); //Increment back to show how what number user originally input
+            throw new TaskNotFoundException(taskToMarkDoneIndex);
         }else if (getTask(taskToMarkDoneIndex).getIsDone()){
             throw new DukeException(Messages.TASK_DONE_EXIST);
         }else {
@@ -113,12 +112,11 @@ public class TaskList {
      * Undo a particular task as done
      */
     public void markAsUndoTask(int taskToMarkUndoneIndex) throws TaskNotFoundException, DukeException{
-        taskToMarkUndoneIndex = taskToMarkUndoneIndex - 1; //Decrement as comparing by List index
         boolean hasExceededTaskListSizeLimit = taskToMarkUndoneIndex > allTasks.size();
         boolean isOutOfBoundTaskListStartIndex = taskToMarkUndoneIndex < 0;
 
         if (hasExceededTaskListSizeLimit || isOutOfBoundTaskListStartIndex){
-            throw new TaskNotFoundException(taskToMarkUndoneIndex + 1); //Increment back to show how what number user originally input
+            throw new TaskNotFoundException(taskToMarkUndoneIndex);
         }else if (!getTask(taskToMarkUndoneIndex).getIsDone()){
             throw new DukeException(Messages.TASK_UNDONE_EXIST);
         }else {
@@ -138,7 +136,7 @@ public class TaskList {
         if (hasExceededTaskListSizeLimit || isOutOfBoundTaskListStartIndex){
             throw new TaskNotFoundException(taskIndex);
         }else{
-            return allTasks.get(taskIndex);
+            return allTasks.get(taskIndex-1);
         }
     }
 

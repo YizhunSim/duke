@@ -25,9 +25,9 @@ public class UndoTaskCommand extends Command{
         try{
             taskList.markAsUndoTask(this.targetUndoTaskIndex);
             storage.saveAllTask(taskList.getAllTask());
-            ui.showUndoneTask(taskList.getTask(targetUndoTaskIndex - 1).toString());
+            ui.showUndoneTask(taskList.getTask(targetUndoTaskIndex).toString());
 
-            return Messages.UNMARK_TASK_DONE + Messages.getTask(taskList.getTask(targetUndoTaskIndex - 1).toString());
+            return Messages.UNMARK_TASK_DONE + Messages.getTask(taskList.getTask(targetUndoTaskIndex).toString());
         }catch (TaskNotFoundException | StorageOperationException ex){
             ui.showError(Messages.FAIL_TO_UMMARK_TASK);
             ui.showError(ex.getMessage());

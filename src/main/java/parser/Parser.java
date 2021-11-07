@@ -254,7 +254,7 @@ public class Parser {
         int targetIndex = -1;
         try{
             targetIndex = Integer.parseInt((args));
-            return new DeleteTaskCommand(targetIndex - 1);
+            return new DeleteTaskCommand(targetIndex);
         } catch (Exception e){
             return new IncorrectCommand("Task: "+ targetIndex +" cannot be deleted");
         }

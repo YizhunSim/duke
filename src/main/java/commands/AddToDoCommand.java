@@ -4,6 +4,7 @@ import common.Messages;
 import data.Task;
 import data.TaskList;
 import data.exception.StorageOperationException;
+import data.exception.TaskNotFoundException;
 import storage.Storage;
 import ui.Ui;
 
@@ -31,7 +32,7 @@ public class AddToDoCommand extends Command {
             ui.printAddSingleTask(task.toString(), taskList.getTotalListCount());
 
             return Messages.ADDED_TASK + Messages.getTask(task.toString()) + ".\n" + Messages.getTaskCount(taskList.getTotalListCount());
-        }catch(StorageOperationException ex){
+        }catch(StorageOperationException | TaskNotFoundException ex){
             ui.showError(Messages.FAIL_TO_ADD_TASK);
             ui.showError(ex.getMessage());
             return Messages.FAIL_TO_ADD_TASK;

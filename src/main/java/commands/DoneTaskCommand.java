@@ -25,9 +25,9 @@ public class DoneTaskCommand extends Command{
         try{
             taskList.markAsDoneTask(this.targetMarkAsDoneIndex);
             storage.saveAllTask(taskList.getAllTask());
-            ui.showMarkDoneTask(taskList.getTask(targetMarkAsDoneIndex - 1).toString());
+            ui.showMarkDoneTask(taskList.getTask(targetMarkAsDoneIndex).toString());
 
-            return Messages.MARK_TASK_DONE + Messages.getTask(taskList.getTask(targetMarkAsDoneIndex - 1).toString());
+            return Messages.MARK_TASK_DONE + Messages.getTask(taskList.getTask(targetMarkAsDoneIndex).toString());
         }catch (TaskNotFoundException | StorageOperationException ex){
             ui.showError(Messages.FAIL_TO_MARK_TASK);
             ui.showError(ex.getMessage());

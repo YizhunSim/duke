@@ -119,7 +119,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void getLatestAddedTask_validTaskList_success(){
+    public void getLatestAddedTask_validTaskList_success() throws TaskNotFoundException {
         Task t1 = new Deadline("deadline description", LocalDateTime.of(2021,10,10,10,10));
         Task t2 = new Event("event description", LocalDateTime.of(2021,10,10,10,10));
         Task t3 = new Todo("todo description");
@@ -175,7 +175,7 @@ public class TaskListTest {
         taskList.addTask(t2);
         taskList.addTask(t3);
 
-        assertEquals(t2, taskList.getTask(validTaskId-1));
+        assertEquals(t2, taskList.getTask(validTaskId));
     }
 
     @Test
