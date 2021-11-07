@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Text UI of the application.
@@ -101,6 +102,16 @@ public class Ui {
      */
     public void printAllTasks(List<String> taskList) {
         out.println("You have "+ taskList.size() + " tasks in the list.");
+        for (int i = 0; i < taskList.size(); i++) {
+            out.println(i + 1 + ". " + taskList.get(i));
+        }
+    }
+
+    /**
+     * Shows all the Task in the TaskList that consist of the keyword
+     */
+    public void foundTasksWithKeyword(List<String> taskList, Set<String> keyword) {
+        out.println("You have "+ taskList.size() + " tasks that have the keyword: "+ keyword +" in the list.");
         for (int i = 0; i < taskList.size(); i++) {
             out.println(i + 1 + ". " + taskList.get(i));
         }

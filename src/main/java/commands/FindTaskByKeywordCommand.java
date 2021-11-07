@@ -23,9 +23,9 @@ public class FindTaskByKeywordCommand extends Command{
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         List<Task> tasksFound = getTaskWithDescriptionContainingAnyKeyword(keywords, taskList);
-        ui.printAllTasks(taskList.getAllTaskListString(tasksFound));
+        ui.foundTasksWithKeyword(taskList.getAllTaskListString(tasksFound), keywords);
 
-        return Messages.getAllTask(taskList.getAllTaskListString(tasksFound));
+        return Messages.foundTasksWithKeyword(taskList.getAllTaskListString(tasksFound), keywords);
 
     }
 

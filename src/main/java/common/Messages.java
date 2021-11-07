@@ -1,6 +1,7 @@
 package common;
 
 import java.util.List;
+import java.util.Set;
 
 public class Messages {
     public static final String DIVIDER = "_______________________________________________________";
@@ -61,6 +62,18 @@ public class Messages {
         String result = "";
         for (int i = 0; i < taskList.size(); i++) {
             result += i + 1 + ". " + taskList.get(i) +"\n";
+        }
+        return resultTaskCount + result.trim();
+    }
+
+    /**
+     * Shows all the Task in the TaskList that consist of the keyword
+     */
+    public static String foundTasksWithKeyword(List<String> taskList, Set<String> keyword) {
+        String resultTaskCount = ("You have "+ taskList.size() + " tasks that have the keyword: "+ keyword +" in the list.");
+        String result = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            result += i + 1 + ". " + taskList.get(i) + "\n";
         }
         return resultTaskCount + result.trim();
     }

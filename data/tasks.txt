@@ -5,7 +5,7 @@ T | 0 | Learn about Java Assertions
 T | 0 | Learn React.JS Front End Development
 D | 0 | TIC2002 Week 7 Quiz – Part 2 | 12/10/2021 1900
 D | 1 | TIC2002 SE Report (Soft Deadline) | 8/11/2021 2359
-D | 0 | TIC2002 Week 6 Quiz | 5/10/2021 1900
+D | 0 | TIC2002 Week 6 Quiz | 19/10/2021 1900
 D | 1 | TIC2002 SE Report (Hard Deadline) | 14/11/2021 2359
 D | 0 | TIC2002 Week 2 Quiz | 30/09/2021 1900
 D | 1 | TIC2002 Week 7 Quiz – Part 1 | 12/10/2021 1900
@@ -16,4 +16,3 @@ E | 1 | TIC2002 Week 9 Quiz | 26/10/2021 1900
 E | 1 | TIC2002 Week 8 Quiz – Part 2 | 19/10/2021 1900
 E | 0 | TIC2002 Week 11 Quiz | 9/11/2021 1900
 E | 0 | TIC2002 Final Exam | 2/12/2021 0100
-T | 0 | class, object and sequence diagram for SE Project
