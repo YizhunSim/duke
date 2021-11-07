@@ -14,6 +14,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SortTaskCommand extends Command{
+    public static final String COMMAND_WORD = CommandEnum.SORT.toString().toLowerCase();
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts for all deadline/events task based on sortType parameter given. "
+            + "Parameters: [taskType] [sortType] \n"
+            + "Example: " + COMMAND_WORD + " event chronological\n "
+            + COMMAND_WORD + " deadline chronological\n "
+            + COMMAND_WORD + " done";
+
     public static final String EVENT = CommandEnum.EVENT.toString().toLowerCase();
     public static final String DEADLINE = CommandEnum.DEADLINE.toString().toLowerCase();
     private static final String CHRONOLOGICAL = "chronological";

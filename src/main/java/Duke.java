@@ -13,9 +13,9 @@ public class Duke {
     private boolean isExit = false;
 
     public Duke(String filePath){
-        ui = new Ui();
-        storage = new Storage(filePath);
         try{
+            ui = new Ui();
+            storage = new Storage(filePath);
             taskList = new TaskList(storage.load());
         }catch(StorageOperationException e){
             ui.showLoadingError();

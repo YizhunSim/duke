@@ -24,6 +24,7 @@ public class HelpCommand extends Command{
         commandNames.add(UndoTaskCommand.MESSAGE_USAGE);
         commandNames.add(FindTaskByKeywordCommand.MESSAGE_USAGE);
         commandNames.add(SearchTasksByDateCommand.MESSAGE_USAGE);
+        commandNames.add(SortTaskCommand.MESSAGE_USAGE);
         commandNames.add(ListCommand.MESSAGE_USAGE);
         commandNames.add(HelpCommand.MESSAGE_USAGE);
         commandNames.add(ExitCommand.MESSAGE_USAGE);

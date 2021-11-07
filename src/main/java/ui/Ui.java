@@ -61,11 +61,21 @@ public class Ui {
         out.println(errorMessage);
     }
 
+    /**
+     * Returns Invalid input message fed in by user
+     *
+     * @param input Invalid input message to be appended with input
+     */
     public String showInvalidInput(String input) {
         out.println(Messages.INVALID_INPUT_USER + " \n" + input);
         return Messages.INVALID_INPUT_USER + " \n" + input;
     }
 
+    /**
+     * Returns Incorrect input message fed in by user
+     *
+     * @param input Incorrect input message to be appended with input
+     */
     public String showIncorrectInput(String input) {
         out.println(Messages.MESSAGE_INVALID_COMMAND_FORMAT + " \n" + input);
         return Messages.MESSAGE_INVALID_COMMAND_FORMAT + " \n" + input;
@@ -78,6 +88,9 @@ public class Ui {
         out.println(DIVIDER);
     }
 
+    /**
+     * Read Command
+     */
     public String readCommand() {
         out.print("Enter command: ");
         return in.nextLine();
@@ -153,11 +166,11 @@ public class Ui {
     /**
      * Shows All the Tasks group by the same date
      *
-     * @param TasksOfSameDates TaskList With similar date
+     * @param tasksOfSameDates TaskList With similar date
      */
-    public void showTasksOnSpecificDate(List<String> TasksOfSameDates) {
+    public void showTasksOnSpecificDate(List<String> tasksOfSameDates) {
         showLine();
-        for (String t : TasksOfSameDates) {
+        for (String t : tasksOfSameDates) {
             out.println(t);
         }
     }

@@ -44,9 +44,9 @@ public class Messages {
 
     public static final String FAIL_TO_UMMARK_TASK = "Unable to mark task as undone. Please check if task exist";
 
-    public static final String TASK_EXIST = "The same task already exist. [Duplicates]";
+    public static final String TASK_EXIST = "The same Task already exist. [Duplicates]";
 
-    public static final String FAIL_TO_FIND_TASK_BY_KEYWORD = "Unable to find task by keyword.";
+    public static final String UNABLE_TO_FIND_TASK_BY_KEYWORD = "Unable to find task by keyword.";
 
     public static String getTask(String task){
         return task;

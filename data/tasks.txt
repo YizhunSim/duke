@@ -1,29 +1,19 @@
-E | 0 | FinTech Presentation class | 1/11/2021 0900
-E | 1 | technical proposal | 18/10/2021 1700
-T | 1 | read investment
-D | 1 | week9 SE | 15/10/2021 2200
-D | 1 | read discipline equals freedom | 20/10/2021 1100
-E | 1 | terranium workshop | 16/10/2021 0230
-T | 0 | read warren buffett essays
-T | 0 | touchup Technical proposal
-D | 0 | NusFinTech Persona Interview | 26/10/2021 0900
-E | 1 | Gemlets Birthday | 23/10/2021 1800
-T | 0 | water terranium
-D | 1 | complete Week10 SE | 24/10/2021 2359
-E | 1 | live life enjoy | 24/10/2021 1700
-D | 0 | run even if it rains | 24/10/2021 1700
-E | 0 | Boxing class | 25/10/2021 0715
-T | 0 | prob and stats revision
-E | 0 | prob and stats tuition | 2/11/2021 1800
-T | 1 | focus
-T | 1 | move with week12
-E | 0 | do prob and stats tutorial 3,4,5 | 4/11/2021 1800
-D | 0 | Start on SE Report | 7/11/2021 0900
-T | 0 | Journal
-D | 0 | Prepare Final Submission For TIC2002 SE Report (Soft Deadline) | 8/11/2021 2359
-E | 0 | TIC2002 Final Exam | 2/12/2021 1300
-T | 0 | DO SE Report - Prepare for submission
-D | 0 | TIC2002 Quiz: Week 12 Quiz | 16/11/2021 1900
-T | 0 | create todo task
-E | 0 | create event task | 4/11/2021 1800
-D | 0 | create deadline task | 4/11/2021 2000
+T | 0 | Learn Java Programming
+T | 0 | Implement Java Unit Testing in Duke application
+T | 0 | Study Java Object and Class Diagram
+T | 0 | Learn about Java Assertions
+T | 0 | Learn React.JS Front End Development
+D | 0 | TIC2002 Week 7 Quiz – Part 2 | 12/10/2021 1900
+D | 1 | TIC2002 SE Report (Soft Deadline) | 8/11/2021 2359
+D | 0 | TIC2002 Week 6 Quiz | 5/10/2021 1900
+D | 1 | TIC2002 SE Report (Hard Deadline) | 14/11/2021 2359
+D | 0 | TIC2002 Week 2 Quiz | 30/09/2021 1900
+D | 1 | TIC2002 Week 7 Quiz – Part 1 | 12/10/2021 1900
+E | 0 | TIC2002 Week 12 Quiz | 16/11/2021 1900
+E | 0 | TIC2002 Week 8 Quiz – Part 1 | 19/10/2021 1900
+E | 1 | TIC2002 Week 10 Quiz | 2/11/2021 1900
+E | 1 | TIC2002 Week 9 Quiz | 26/10/2021 1900
+E | 1 | TIC2002 Week 8 Quiz – Part 2 | 19/10/2021 1900
+E | 0 | TIC2002 Week 11 Quiz | 9/11/2021 1900
+E | 0 | TIC2002 Final Exam | 2/12/2021 0100
+T | 0 | class, object and sequence diagram for SE Project

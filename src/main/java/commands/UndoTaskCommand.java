@@ -21,7 +21,7 @@ public class UndoTaskCommand extends Command{
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, StorageOperationException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try{
             taskList.markAsUndoTask(this.targetUndoTaskIndex);
             storage.saveAllTask(taskList.getAllTask());
